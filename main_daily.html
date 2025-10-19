@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The Daily Movie Guessing Game" />
+    <title>FilmIQ - Daily Guessing Game</title>
+    <link rel="stylesheet" href="css/styles_daily.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./data/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./data/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./data/favicon-16x16.png">
+    <link rel="manifest" href="./data/site.webmanifest">
+    <style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background-image: url("./data/bg.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+        background-color: #303030;
+        color: #fff;
+    }
+    </style>
+  </head>
+  <body>
+    <header>
+              <h4>
+                <div id="next-puzzle-timer">Next Movie in: 00:00:00</div>
+              </h4>
+            <div class="header-right">
+            <div class="social-icons">
+              <a href="./main.html" aria-label="Home" title="Home" class="social-link">🏠︎</a>
+                <a href="https://x.com/@filmiq" aria-label="X/Twitter" title="X/Twitter" class="social-link">𝕏</a>
+                <a href="mailto:thomasrobb5@gmail.com" aria-label="Email" title="Email" class="social-link">✉</a>
+                <a href="https://www.linkedin.com/in/tom-robb-89b17117b/" aria-label="LinkedIn" title="LinkedIn" class="social-link">in</a>
+                
+            </div>
+        </div>
+    </header>
+    <main>
+      <div>
+        <p class="datearea" id="date"></p> <!-- Emptied for JS -->
+        
+      </div>          
+       
+      <div id="game-container">
+        <div id="reveal"></div> <!-- Single reveal, no inline style (use CSS) -->
+        <div id="stage-indicator">Stage 1: Very Hard (Audio Clip)</div>
+        <div id="media-player">
+          <div id="loading-indicator">Loading media...</div>
+        </div>
+        <div id="input-container">
+          <input type="text" id="guess-input" placeholder="Guess the movie title..." />
+          <div id="dropdown" class="dropdown"></div>
+          <button id="submit-btn">Submit Guess</button>
+        </div>
+        <div id="previous-guesses"></div>
+        <div id="score"></div>
+        <button id="share-btn" style="display: none;">Share Score</button>
+        <button id="calendar-btn" style="margin-top: 20px;">📅 View Past Games</button>
+      </div>
+      <div id="volume-container"> <!-- Back at bottom of main -->
+        <label for="global-volume">Global Volume: </label>
+        <input type="range" id="global-volume" min="0" max="1" step="0.1" value="0.5" />
+      </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
+    </footer>
+
+    <!-- Start Screen Overlay -->
+    <div id="start-screen">
+      <div class="start-content">
+        <h2>FilmIQ Rules</h2>
+        <div id="start-loading" style="display: none;">Loading media...</div> <!-- Moved outside ul -->
+        <p>Guess the movie in 4 stages:</p>
+        <ul>
+          <li>Stage 1: 30s audio clip - 4 points</li>
+          <li>Stage 2: 5 still frames - 3 points</li>
+          <li>Stage 3: 8s video clip - 2 points</li>
+          <li>Stage 4: 30s video clip - 1 point</li>
+        </ul>
+        <p>Use the search to guess; submit or skip to advance.</p>
+        <button id="play-start-btn">Play</button>
+      </div>
+    </div>
+
+    <!-- Calendar Modal -->
+    <div id="calendar-modal" aria-modal="true">
+      <div class="calendar-content">
+        <h2>📅 Past Games</h2>
+        <div class="calendar-nav">
+  <button id="prev-month">Prev</button>
+  <span id="month-year"></span>
+  <button id="next-month">Next</button>
+</div>
+        <div id="calendar-dates"></div>
+        <button id="close-calendar-btn">Close</button>
+      </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" aria-modal="true"></div> <!-- Added by JS, but aria for completeness -->
+
+    <script src="js/script_daily.js"></script>
+  </body>
+</html>

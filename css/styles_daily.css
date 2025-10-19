@@ -1,0 +1,650 @@
+body {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 3rem;
+    background: rgba(0, 0, 0, 0.514);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: all 0.3s ease;
+    
+}
+
+.social-icons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.05);
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+}
+
+.social-link:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 0.7em;
+}
+
+#game-container {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    position: relative; /* For volume positioning */
+}
+
+#stage-indicator {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ffffff;
+    white-space: nowrap; /* Prevents text wrap from causing height jumps */
+}
+
+#media-player {
+    margin: 30px 0;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 120px; /* Stabilizes layout during audio loads; prevents downward shift */
+    transition: height 0.2s ease; /* Smooths any remaining reflow */
+}
+
+#media-player audio,
+#media-player video {
+    width: 100%;
+    max-width: 700px; /* Wider for audio/video */
+    height: auto;
+    border-radius: 30px;
+}
+
+#loading-indicator {
+    font-size: 1.2em;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modern Custom Audio Player */
+.custom-audio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(66, 66, 66, 0.8), rgba(48, 48, 48, 0.8));
+    padding: 12px 16px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.custom-play-pause {
+    background: linear-gradient(135deg, #FF5F5F, #e0222263);
+    color: white;
+    border: none;
+    padding: 3px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1em;
+    width: 44px;
+    height: 44px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 95, 95, 0.3);
+}
+
+.custom-play-pause:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 95, 95, 0.4);
+}
+
+.custom-progress {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+
+}
+
+.custom-progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: linear-gradient(135deg, #ffffff, #3f3f3f);
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(255, 221, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.custom-progress::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.custom-time {
+    font-size: 0.9em;
+    color: #ffffff;
+    min-width: 80px;
+    font-weight: bold;
+}
+
+#volume-container {
+    width: 250px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Centers below game */
+    align-items: center;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    /* Removed absolute/relative positioning */
+}
+
+#global-volume {
+    width: 100px;
+}
+
+#input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    position: relative;
+    width: 100%;
+}
+
+#guess-input {
+    padding: 10px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    flex: 1;
+    min-width: 300px; /* Ensure room for inline */
+    max-width: 500px;
+}
+
+#submit-btn {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background: #525252;
+    color: white;
+    border: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#submit-btn:hover {
+    background: #383838;
+    color: rgb(255, 255, 255);
+    transition: all 0.2s ease;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border: 0px solid #ffffff;
+    border-radius: 5px;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 15;
+    display: none;
+}
+
+@media (max-width: 600px) {
+  .dropdown {
+    left: 0;
+    width: 100%;
+  }
+}
+
+.dropdown.show {
+    display: block;
+}
+
+.dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown li:last-child {
+    border-bottom: none;
+}
+
+#previous-guesses {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.guess-item {
+    margin: 5px 0;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.skip-item {
+    margin: 5px 0;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: #FFDD00;
+}
+
+#score {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+#reveal {
+    display: none; /* Default hidden */
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f911; /* Light background for contrast */
+    border-radius: 12px;
+    border: 1px solid #ddd; /* Subtle border */
+    transition: opacity 0.3s ease; /* Smooth fade-in */
+}
+
+#reveal .movie-poster {
+  max-width: 300px;
+  max-height: 450px;
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+#reveal strong {
+  font-size: 25px;
+  color: #ffffff;
+  display: block;
+}
+
+#share-btn {
+    margin: 20px auto; /* Better centering */
+    display: block;
+    width: fit-content;
+    padding: 10px 20px;
+    background: #ffffff;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#image-gallery {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+#image-gallery img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+#max-btn { /* Fixed ID */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+#max-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    color: rgb(255, 255, 255);
+}
+
+.gallery-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#image-gallery button {
+    background: #5f5f5f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+#image-gallery button:hover {
+    background: #333333;
+    color: white; /* Fixed: was black, now white for visibility */
+}
+
+#frame-counter {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #ffffff;
+}
+
+/* Image Modal */
+#image-modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s;
+}
+
+#image-modal img {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+#date{
+    font-size: 0.9em;
+    color: #ffffff;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.425);
+    background-size: 120px;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+/* Start Screen */
+#start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.start-content {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    text-align: center;
+    color: #fff;
+}
+
+.start-content h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.start-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    text-align: left;
+}
+
+.start-content li {
+    margin: 10px 0;
+}
+
+#start-loading {
+  color: #FF5F5F;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#play-start-btn {
+    padding: 10px 20px;
+    background: #FF5F5F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+#play-start-btn:hover {
+    background: #e02222;
+}
+
+#calendar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.calendar-day.current {
+  background-color: #4CAF50;
+  font-weight: bold;
+  border-radius: 50%;
+  /* Removed cursor: not-allowed; - let .active handle pointer if playable */
+  color: black;
+}
+
+.calendar-content {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    text-align: center;
+    color: #fff;
+}
+
+.calendar-content h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.calendar-day {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.calendar-day:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-day.inactive {
+    background: rgba(255, 255, 255, 0.05);
+    color: #666;
+    cursor: not-allowed;
+}
+
+.calendar-day.active {
+  background: #FF5F5F;
+  cursor: pointer;
+  font-weight: bold; /* Optional: emphasize available dates */
+}
+
+/* Weekday headers (for JS-added) */
+#calendar-dates > div:first-child:nth-last-child(n+8) { /* Approximate selector for first 7 */
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#close-calendar-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #FF5F5F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#close-calendar-btn:hover {
+    background: #e02222;
+}
+
+#calendar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em; /* Space between icon and text */
+  padding: 0.75em 1.25em;
+  background-color: #FF5F5F; /* Light gray background; adjust to your theme */
+  color: #333; /* Dark text */
+  border: none;
+  border-radius: 0.7em; /* Rounded corners */
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  
+  
+}
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.calendar-nav button {
+    background: #FF5F5F;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calendar-nav button:hover {
+    background: #e02222;
+}
+
+#month-year {
+    font-size: 1.5em;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.celebration-message {
+  animation: pulse 1s infinite; /* Fallback if JS inline fails */
+}
