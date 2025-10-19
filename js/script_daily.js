@@ -27,8 +27,9 @@ function getMediaPath() {
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, '0');
   const day = String(currentDate.getDate()).padStart(2, '0');
-  return `./media/${year}${month}${day}/`;
+  return `https://pub-41e14c99425c4404ac527c1af1f562cf.r2.dev/media/${year}${month}${day}/`;
 }
+
 function refreshStageMedia() {
   const path = getMediaPath();
   stageMedia[1].src = `${path}audio_clip.mp3`;
