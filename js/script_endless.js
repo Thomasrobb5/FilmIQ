@@ -14,7 +14,7 @@ let manifestLoaded = false; // Track if manifest is ready
 let currentPuzzleId = ''; // YYYYMMDD string for media
 let lives = 5;
 let currentStreak = 0;
-let maxStreak = 0;
+let maxStreak = parseInt(localStorage.getItem('maxStreak')) || 0; // Load from localStorage or default to 0
 
 // Dropdown debounce timeout
 let dropdownTimeout = null;
@@ -43,7 +43,7 @@ const stageMedia = {
 // Stages labels (updated for 30s audio in Stage 1)
 const stageLabels = [
   '', 
-  'Very Hard: 20-second audio clip', 
+  'Very Hard: 30-second audio clip', 
   'Hard: 5 random still frames', 
   'Medium: 8-second video clip', 
   'Easy: 30-second video clip'
@@ -351,7 +351,7 @@ function loadMedia(stage) {
       console.log(`Audio loaded with volume: ${audioEl.volume}`); // Verify volume
     });
 
-    // New: Handle end of media
+    // Handle end of media
     audioEl.addEventListener('ended', () => {
       playPauseBtn.textContent = '▶';
       progress.value = 0;
@@ -528,11 +528,12 @@ function checkGuess(guess) {
   return normalizedGuess === normalizedMovie;
 }
 
-// Update status displays
+// Update status displays and save maxStreak to localStorage
 function updateStatus() {
   livesEl.textContent = `Lives: ${'❤️'.repeat(lives)}`;
   currentStreakEl.textContent = `Current Streak: ${currentStreak}`;
   maxStreakEl.textContent = `Max Streak: ${maxStreak}`;
+  localStorage.setItem('maxStreak', maxStreak); // Save maxStreak to localStorage
 }
 
 // End puzzle (not full game)
@@ -570,7 +571,7 @@ function endPuzzle(isCorrect) {
     // Simple animation: pulse
     messageEl.style.animation = 'pulse 1s infinite';
   } else {
-    messageEl.innerHTML = `😔 Failed this one... -1 Life. Streak reset. 💪`;
+    messageEl.innerHTML = `😔 Failed this one... -1 Life. ${lives > 0 ? 'Keep going!' : 'Game Over!'} 💪`;
     messageEl.style.color = '#FF6B6B';
     messageEl.style.fontSize = '20px';
     messageEl.style.fontWeight = 'bold';
@@ -641,7 +642,9 @@ function skipStage() {
   } else {
     score = 0; // No points if failed all
     lives--;
-    currentStreak = 0;
+    if (lives === 0) {
+      currentStreak = 0; // Reset streak only when lives hit 0
+    }
     updateStatus();
     endPuzzle(false);
   }
@@ -677,7 +680,9 @@ submitBtn.onclick = () => {
   } else {
     score = 0; // No points if failed all
     lives--;
-    currentStreak = 0;
+    if (lives === 0) {
+      currentStreak = 0; // Reset streak only when lives hit 0
+    }
     updateStatus();
     endPuzzle(false);
   }
@@ -721,8 +726,7 @@ function loadNewPuzzle() {
 
 function restartGame() {
   lives = 5;
-  currentStreak = 0;
-  maxStreak = 0;
+  currentStreak = 0; // Reset current streak on game restart
   updateStatus();
   loadNewPuzzle();
 }
@@ -732,6 +736,7 @@ console.log('Initializing game...');
 loadMovies(); // Load movie list on start
 loadAvailableDates().then(() => {
   // Ensure dates loaded before play
+  updateStatus(); // Initialize UI with loaded maxStreak
 });
 startScreen.style.display = 'flex';
 gameContainer.style.display = 'none'; // Hide game until play
