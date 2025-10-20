@@ -65,6 +65,11 @@ footer {
     background: rgba(0, 0, 0, 0.5);
     font-size: 0.7em;
 }
+footer p {
+    margin: 5px;
+    color: #ffffff;
+}
+
 
 #game-container {
     background: rgba(0, 0, 0, 0.7);
@@ -432,10 +437,6 @@ footer {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-#image-modal {
-  /* existing styles */
 }
 
 .modal-buttons {
