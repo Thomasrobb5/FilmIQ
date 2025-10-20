@@ -1,3 +1,5 @@
+/* Copy of styles_daily.css with additions for endless mode */
+
 body {
     font-family: "Courier New", Courier, monospace;
     font-weight: bold;
@@ -16,12 +18,12 @@ header {
     top: 0;
     z-index: 10;
     transition: all 0.3s ease;
-    
 }
 
 .social-icons {
     display: flex;
     gap: 0.5rem;
+    
 }
 
 .social-link {
@@ -48,6 +50,8 @@ header {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    margin-left: auto;
+    
 }
 
 main {
@@ -69,6 +73,7 @@ footer p {
     margin: 5px;
     color: #ffffff;
 }
+
 
 #game-container {
     background: rgba(0, 0, 0, 0.7);
@@ -474,16 +479,6 @@ footer p {
     to {opacity: 1;}
 }
 
-#date{
-    font-size: 0.9em;
-    color: #ffffff;
-    margin-bottom: 10px;
-    background-color: rgba(0, 0, 0, 0.425);
-    background-size: 120px;
-    padding: 15px;
-    border-radius: 15px;
-}
-
 /* Start Screen */
 #start-screen {
     position: fixed;
@@ -543,129 +538,6 @@ footer p {
     background: #e02222;
 }
 
-#calendar-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-}
-
-.calendar-day.current {
-  background-color: #4CAF50;
-  font-weight: bold;
-  border-radius: 50%;
-  /* Removed cursor: not-allowed; - let .active handle pointer if playable */
-  color: black;
-}
-
-.calendar-content {
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    padding: 30px;
-    max-width: 600px;
-    text-align: center;
-    color: #fff;
-}
-
-.calendar-content h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-#calendar-dates {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    text-align: center;
-}
-
-.calendar-day {
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.calendar-day:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.calendar-day.inactive {
-    background: rgba(255, 255, 255, 0.05);
-    color: #666;
-    cursor: not-allowed;
-}
-
-.calendar-day.active {
-  background: #FF5F5F;
-  cursor: pointer;
-  font-weight: bold; /* Optional: emphasize available dates */
-}
-
-/* Weekday headers (for JS-added) */
-#calendar-dates > div:first-child:nth-last-child(n+8) { /* Approximate selector for first 7 */
-  background: rgba(255, 255, 255, 0.2);
-}
-
-#close-calendar-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: #FF5F5F;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#close-calendar-btn:hover {
-    background: #e02222;
-}
-
-#calendar-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em; /* Space between icon and text */
-  padding: 0.75em 1.25em;
-  background-color: #FF5F5F; /* Light gray background; adjust to your theme */
-  color: #333; /* Dark text */
-  border: none;
-  border-radius: 0.7em; /* Rounded corners */
-  font-size: 1em;
-  font-weight: bold;
-  cursor: pointer;
-  
-  
-}
-.calendar-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.calendar-nav button {
-    background: #FF5F5F;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.calendar-nav button:hover {
-    background: #e02222;
-}
-
-#month-year {
-    font-size: 1.5em;
-}
-
 @keyframes pulse {
   0% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -674,4 +546,33 @@ footer p {
 
 .celebration-message {
   animation: pulse 1s infinite; /* Fallback if JS inline fails */
+}
+
+/* New styles for endless mode */
+.status {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+#lives {
+  color: #FF5F5F; /* Red hearts */
+  font-size: 1.8em; /* Slightly larger for nicer look */
+}
+
+#next-btn, #restart-btn {
+  margin: 20px auto;
+  display: block;
+  width: fit-content;
+  padding: 10px 20px;
+  background: #FF5F5F;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+#next-btn:hover, #restart-btn:hover {
+  background: #e02222;
 }
