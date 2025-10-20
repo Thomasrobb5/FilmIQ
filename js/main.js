@@ -1,10 +1,10 @@
 const toggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Check for saved theme, default to dark
-const savedTheme = localStorage.getItem('theme') || 'dark';  // 'dark' as fallback
+
+const savedTheme = localStorage.getItem('theme') || 'dark'; 
 body.setAttribute('data-theme', savedTheme);
-toggle.checked = savedTheme === 'dark';  // Toggle starts checked for dark
+toggle.checked = savedTheme === 'dark';
 
 toggle.addEventListener('change', () => {
     const theme = toggle.checked ? 'dark' : 'light';
@@ -27,12 +27,12 @@ cards.forEach((card, index) => {
 // Generate and position floating icons in an even grid with small random offsets
 const iconSources = ['bg_icons/icon1.png', 'bg_icons/icon2.png', 'bg_icons/icon3.png', 'bg_icons/icon4.png', 'bg_icons/icon5.png', 'bg_icons/icon6.png', 'bg_icons/icon7.png', 'bg_icons/icon8.png'];
 const numIcons = 40;
-const cols = 5; // Fewer cols for better horizontal balance
-const rows = 8; // More rows for even vertical spread
+const cols = 5;
+const rows = 8;
 const spacingX = 100 / (cols - 1);
 const spacingY = 100 / (rows - 1);
-const offsetVariance = 8; // Slightly more scatter
-const icons = []; // Store for parallax
+const offsetVariance = 8;
+const icons = [];
 
 for (let i = 0; i < numIcons; i++) {
     const icon = document.createElement('img');
@@ -44,7 +44,7 @@ for (let i = 0; i < numIcons; i++) {
     const row = Math.floor(i / cols);
     let x = col * spacingX;
     let y = row * spacingY;
-    x += (Math.random() - 0.5) * offsetVariance * 2; // +/- offset
+    x += (Math.random() - 0.5) * offsetVariance * 2;
     y += (Math.random() - 0.5) * offsetVariance * 2;
     icon.style.left = `${Math.max(0, Math.min(100, x))}%`;
     icon.style.top = `${Math.max(0, Math.min(100, y))}%`;
@@ -78,7 +78,7 @@ for (let i = 0; i < numIcons; i++) {
 let ticking = false;
 function updateParallax() {
     const scrollY = window.scrollY;
-    const offsetY = -scrollY * 0.2; // Negative for lagging effect (depth)
+    const offsetY = -scrollY * 0.2;
     icons.forEach(icon => {
         icon.style.transform = `${icon.dataset.baseTransform} translateY(${offsetY}px)`;
     });
@@ -124,12 +124,14 @@ function loadDailyQuote() {
     const cacheKey = `dailyQuote_${today}`;
     const quoteContent = document.getElementById('quote-content');
     const quoteAuthor = document.getElementById('quote-author');
+    const quoteSource = document.getElementById('quote-source');
 
     const cached = localStorage.getItem(cacheKey);
     if (cached) {
         const data = JSON.parse(cached);
         quoteContent.textContent = data.content;
         quoteAuthor.textContent = `— ${data.author}`;
+        quoteSource.textContent = data.source;
         return;
     }
 
@@ -137,7 +139,7 @@ function loadDailyQuote() {
     let quotes = JSON.parse(localStorage.getItem(quotesCacheKey));
 
     if (!quotes || quotes.length === 0) {
-        fetch('./data/moviequotes.csv')
+        fetch('./data/moviequotes2.csv')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch CSV');
@@ -152,34 +154,35 @@ function loadDailyQuote() {
                 quotes = parsed.slice(1).map(row => ({
                     quote: row[0],
                     author: row[1],
-                    year: row[2]
+                    source: row[3]
                 })).filter(q => q.quote && q.quote.trim());
                 localStorage.setItem(quotesCacheKey, JSON.stringify(quotes));
-                selectAndSetQuote(quotes, today, cacheKey, quoteContent, quoteAuthor);
+                selectAndSetQuote(quotes, today, cacheKey, quoteContent, quoteAuthor, quoteSource);
             })
-            .catch(() => fallbackQuote(quoteContent, quoteAuthor));
+            .catch(() => fallbackQuote(quoteContent, quoteAuthor, quoteSource));
     } else {
-        selectAndSetQuote(quotes, today, cacheKey, quoteContent, quoteAuthor);
+        selectAndSetQuote(quotes, today, cacheKey, quoteContent, quoteAuthor, quoteSource);
     }
 }
 
-function selectAndSetQuote(quotes, todayStr, cacheKey, contentEl, authorEl) {
+function selectAndSetQuote(quotes, todayStr, cacheKey, contentEl, authorEl, sourceEl) {
     const now = new Date(todayStr);
     const start = new Date(now.getFullYear(), 0, 0);
     let dayOfYear = Math.floor((now - start) / 86400000);
-    dayOfYear -= 1; // Adjust to make Jan 1 index 0
+    dayOfYear -= 1;
     const index = dayOfYear % quotes.length;
     const selected = quotes[index];
     contentEl.textContent = selected.quote;
     authorEl.textContent = `— ${selected.author}`;
-    const data = { content: selected.quote, author: selected.author };
+    sourceEl.textContent = selected.source;
+    const data = { content: selected.quote, author: selected.author, source: selected.source };
     localStorage.setItem(cacheKey, JSON.stringify(data));
 }
 
-function fallbackQuote(contentEl, authorEl) {
+function fallbackQuote(contentEl, authorEl, sourceEl) {
     contentEl.textContent = "May the Force be with you.";
     authorEl.textContent = "— Obi-Wan Kenobi";
+    sourceEl.textContent = "Star Wars: Episode IV – A New Hope";
 }
-
 
 loadDailyQuote();
