@@ -32,7 +32,7 @@
             <div class="header-right">
             <div class="social-icons">
               <a href="./main.html" aria-label="Home" title="Home" class="social-link">🏠︎</a>
-                <a href="https://x.com/@filmiq" aria-label="X/Twitter" title="X/Twitter" class="social-link">𝕏</a>
+                <a href="https://x.com/FilmIQ_App" aria-label="X/Twitter" title="X/Twitter" class="social-link">𝕏</a>
                 <a href="mailto:thomasrobb5@gmail.com" aria-label="Email" title="Email" class="social-link">✉</a>
                 <a href="https://www.linkedin.com/in/tom-robb-89b17117b/" aria-label="LinkedIn" title="LinkedIn" class="social-link">in</a>
                 
@@ -41,12 +41,12 @@
     </header>
     <main>
       <div>
-        <p class="datearea" id="date"></p> <!-- Emptied for JS -->
+        <p class="datearea" id="date"></p>
         
       </div>          
        
       <div id="game-container">
-        <div id="reveal"></div> <!-- Single reveal, no inline style (use CSS) -->
+        <div id="reveal"></div>
         <div id="stage-indicator">Stage 1: Very Hard (Audio Clip)</div>
         <div id="media-player">
           <div id="loading-indicator">Loading media...</div>
@@ -61,7 +61,7 @@
         <button id="share-btn" style="display: none;">Share Score</button>
         <button id="calendar-btn" style="margin-top: 20px;">📅 View Past Games</button>
       </div>
-      <div id="volume-container"> <!-- Back at bottom of main -->
+      <div id="volume-container"> 
         <label for="global-volume">Global Volume: </label>
         <input type="range" id="global-volume" min="0" max="1" step="0.1" value="0.5" />
       </div>
@@ -71,11 +71,11 @@
         <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
     </footer>
 
-    <!-- Start Screen Overlay -->
+    
     <div id="start-screen">
       <div class="start-content">
         <h2>FilmIQ Rules</h2>
-        <div id="start-loading" style="display: none;">Loading media...</div> <!-- Moved outside ul -->
+        <div id="start-loading" style="display: none;">Loading media...</div>
         <p>Guess the movie in 4 stages:</p>
         <ul>
           <li>Stage 1: 30s audio clip - 4 points</li>
@@ -88,7 +88,7 @@
       </div>
     </div>
 
-    <!-- Calendar Modal -->
+    
     <div id="calendar-modal" aria-modal="true">
       <div class="calendar-content">
         <h2>📅 Past Games</h2>
@@ -102,8 +102,8 @@
       </div>
     </div>
 
-    <!-- Image Modal -->
-    <div id="image-modal" aria-modal="true"></div> <!-- Added by JS, but aria for completeness -->
+    
+    <div id="image-modal" aria-modal="true"></div>
 
     <script src="js/script_daily.js"></script>
   </body>

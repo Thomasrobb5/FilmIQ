@@ -134,7 +134,7 @@ async function preloadAllMedia() {
   console.log('Preloading all media for date...');
   const path = getMediaPath();
   const promises = [];
-  let preloadVolume = globalVolume ? parseFloat(globalVolume.value) : 0.5; // Default 0.5 if no slider
+  const preloadVolume = globalVolume ? parseFloat(globalVolume.value) : 0.5; // Default 0.5 if no slider
 
   // Audio
   const audioPromise = new Promise((resolve, reject) => {
@@ -192,11 +192,19 @@ modal.id = 'image-modal';
 modal.innerHTML = `
   <span class="close-modal">&times;</span>
   <img class="modal-image" src="" alt="Full size image" />
+  <div class="modal-buttons">
+    <button class="modal-prev">Prev</button>
+    <button class="modal-next">Next</button>
+  </div>
+  <div class="modal-counter">1 / 5</div>
 `;
 document.body.appendChild(modal);
 
 const closeModal = modal.querySelector('.close-modal');
 const modalImage = modal.querySelector('.modal-image');
+const modalPrev = modal.querySelector('.modal-prev');
+const modalNext = modal.querySelector('.modal-next');
+const modalCounter = modal.querySelector('.modal-counter');
 
 // Global volume handler - immediately update all media
 globalVolume.addEventListener('input', (e) => {
@@ -209,7 +217,15 @@ globalVolume.addEventListener('input', (e) => {
   if (currentAudio) {
     currentAudio.volume = volume;
   }
+  // Save to localStorage
+  localStorage.setItem('globalVolume', volume);
 });
+
+// Load saved volume on init
+const savedVolume = localStorage.getItem('globalVolume');
+if (savedVolume !== null && globalVolume) {
+  globalVolume.value = savedVolume;
+}
 
 // Set current date dynamically
 dateEl.textContent = currentDate.toDateString();
@@ -310,6 +326,7 @@ function loadMedia(stage) {
   loadingIndicator.style.display = 'flex';
   const media = stageMedia[stage];
   let mediaElement = null;
+  const currentVolume = globalVolume ? parseFloat(globalVolume.value) : 0.5;
 
   if (media.type === 'audio') {
     // Custom audio player
@@ -332,6 +349,7 @@ function loadMedia(stage) {
     // Create hidden audio element
     const audioEl = new Audio(media.src);
     audioEl.preload = 'auto';
+    audioEl.volume = currentVolume; // Set initial volume
     mediaElements.push(audioEl);
     currentAudio = audioEl;
 
@@ -366,6 +384,7 @@ function loadMedia(stage) {
       customPlayer.appendChild(progress);
       customPlayer.appendChild(timeDisplay);
       mediaPlayer.appendChild(customPlayer);
+      console.log(`Audio loaded with volume: ${audioEl.volume}`); // Verify volume
     });
 
     // New: Handle end of media
@@ -383,12 +402,14 @@ function loadMedia(stage) {
     mediaElement = document.createElement('video');
     mediaElement.src = media.src;
     mediaElement.controls = true;
+    mediaElement.volume = currentVolume; // Set initial volume
     mediaElement.style.display = 'none';
     mediaPlayer.appendChild(mediaElement);
     mediaElements.push(mediaElement); // Add immediately for volume sync
     mediaElement.addEventListener('canplaythrough', () => {
       loadingIndicator.style.display = 'none';
       mediaElement.style.display = 'block';
+      console.log(`Video loaded with volume: ${mediaElement.volume}`); // Verify volume
     });
     mediaElement.addEventListener('error', (e) => {
       console.error('Video load error:', e);
@@ -409,8 +430,46 @@ function loadMedia(stage) {
     maximizeBtn.id = 'max-btn';
     maximizeBtn.textContent = '⛶';
     maximizeBtn.onclick = () => {
-      modalImage.src = currentImageSrc;
+      let modalIndex = currentIndex; // Start from current gallery index
+      modalImage.src = media.srcs[modalIndex];
+      updateModalCounter(modalIndex, media.srcs.length);
       modal.style.display = 'block';
+
+      // Modal navigation handlers (one-time per open)
+      const handlePrev = () => {
+        modalIndex = (modalIndex > 0) ? modalIndex - 1 : media.srcs.length - 1;
+        modalImage.src = media.srcs[modalIndex];
+        updateModalCounter(modalIndex, media.srcs.length);
+      };
+
+      const handleNext = () => {
+        modalIndex = (modalIndex < media.srcs.length - 1) ? modalIndex + 1 : 0;
+        modalImage.src = media.srcs[modalIndex];
+        updateModalCounter(modalIndex, media.srcs.length);
+      };
+
+      modalPrev.onclick = handlePrev;
+      modalNext.onclick = handleNext;
+
+      // Optional: Keyboard navigation in modal
+      const keyHandler = (e) => {
+        if (modal.style.display === 'block') {
+          if (e.key === 'ArrowLeft') handlePrev();
+          if (e.key === 'ArrowRight') handleNext();
+        }
+      };
+      document.addEventListener('keydown', keyHandler);
+
+      // Clean up on close
+      const cleanup = () => {
+        modalPrev.onclick = null;
+        modalNext.onclick = null;
+        document.removeEventListener('keydown', keyHandler);
+      };
+      closeModal.addEventListener('click', cleanup, { once: true });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) cleanup();
+      }, { once: true });
     };
     gallery.appendChild(maximizeBtn);
 
@@ -453,6 +512,10 @@ function loadMedia(stage) {
     gallery.appendChild(counter);
     mediaPlayer.appendChild(gallery);
   }
+}
+
+function updateModalCounter(index, total) {
+  modalCounter.textContent = `${index + 1} / ${total}`;
 }
 
 // Update stage display
@@ -773,8 +836,6 @@ async function showCalendar() {
     }
   }
 
-  // Optional: Await all fallbacks for no flicker (uncomment if perf ok)
-  // if (fallbackPromises.length > 0) await Promise.all(fallbackPromises);
 }
 
 function resetGame() {
