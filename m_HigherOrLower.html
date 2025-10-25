@@ -3,27 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="FilmIQ Higher or Lower - Guess which movie has the higher box office earnings in this fun streak challenge!" />
-    <title>FilmIQ - Higher or Lower</title>
-    <link rel="stylesheet" href="/css/styles_HOR.css" />
+    <meta name="description" content="FilmIQ Higher or Lower - Guess which movie has the higher box office earnings!" />
+    <title>FilmIQ - Higher or Lower (Mobile)</title>
+    <link rel="stylesheet" href="/css/m_styles_HOR.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="/data/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/data/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/data/favicon-16x16.png">
     <link rel="manifest" href="/data/site.webmanifest">
-      <script>
-   
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      window.location.href = '/m_HigherOrLower.html';
-    }
-  </script>
+    <script>
+      // Redirect to index.html if not a mobile device
+      if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.location.href = '/HigherOrLower.html';
+      }
+    </script>
   </head>
   <body>
     <header role="banner">
       <div class="header-content">
-        <div class="status-container" style="display: none;">
-          <div id="mode-indicator" aria-live="polite"></div>
-          <div id="current-streak" class="status">Current Streak: 0</div>
-          <div id="max-streak" class="status">Max Streak: 0</div>
+        <div class="status-wrapper">
+          <div class="status-container" style="display: none;">
+            <div id="mode-indicator" aria-live="polite"></div>
+            <div id="current-streak" class="status">Current Streak: 0</div>
+            <div id="max-streak" class="status">Max Streak: 0</div>
+          </div>
         </div>
         <div class="social-icons">
           <a href="/index.html" aria-label="Home" title="Home" class="social-link">🏠</a>
@@ -75,25 +77,25 @@
       <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
       <span class="version">v1.0.0</span>
     </footer>
-<div id="start-screen" class="overlay show">
-  <div class="overlay-content">
-    <h2>FilmIQ Higher or Lower</h2>
-    <p>Guess which movie has the higher box office earnings!</p>
-    <div class="mode-panels">
-      <div class="mode-panel" role="region" aria-label="Opening Weekend Mode">
-        <h3>Opening Weekend</h3>
-        <p>Compare movies based on their opening weekend box office earnings. Test your knowledge of blockbuster debuts!</p>
-        <button id="opening-mode-btn" type="button">Play Opening Weekend</button>
-      </div>
-      <div class="mode-panel" role="region" aria-label="Lifetime Gross Mode">
-        <h3>Lifetime Gross</h3>
-        <p>Guess which movie earned more over its entire theatrical run. Can you spot the all-time box office champs?</p>
-        <button id="gross-mode-btn" type="button">Play Lifetime Gross</button>
+    <div id="start-screen" class="overlay show">
+      <div class="overlay-content">
+        <h2>FilmIQ Higher or Lower</h2>
+        <p>Guess which movie has the higher box office earnings!</p>
+        <div class="mode-panels">
+          <div class="mode-panel" role="region" aria-label="Opening Weekend Mode">
+            <h3>Opening Weekend</h3>
+            <p>Compare movies based on their opening weekend box office earnings. Test your knowledge of blockbuster debuts!</p>
+            <button id="opening-mode-btn" type="button">Play Opening Weekend</button>
+          </div>
+          <div class="mode-panel" role="region" aria-label="Lifetime Gross Mode">
+            <h3>Lifetime Gross</h3>
+            <p>Guess which movie earned more over its entire theatrical run. Can you spot the all-time box office champs?</p>
+            <button id="gross-mode-btn" type="button">Play Lifetime Gross</button>
+          </div>
+        </div>
+        <p class="game-note">Note: Box office earnings are based on the Domestic market (U.S. and Canada) only, not worldwide.</p>
       </div>
     </div>
-    <p class="game-note">Note: Box office earnings are based on the Domestic market (U.S. and Canada) only, not worldwide.</p>
-  </div>
-</div>
-    <script src="/js/script_HOR.js"></script>
+    <script src="/js/m_script_HOR.js"></script>
   </body>
 </html>

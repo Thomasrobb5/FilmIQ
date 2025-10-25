@@ -1,10 +1,10 @@
 :root {
   --primary-bg: rgba(0, 0, 0, 0.7);
   --accent-color: #FF5F5F;
-  --accent-hover: #FF5F5F;
+  --accent-hover: #e02222;
   --correct-bg: rgba(0, 255, 0, 0.2);
   --incorrect-bg: rgba(255, 0, 0, 0.2);
-  --text-color: #ffffff;
+  --text-color: #E0E0E0;
 }
 
 * {
@@ -28,7 +28,7 @@ body {
 header {
   display: flex;
   justify-content: center;
-  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 2rem);
+  padding: clamp(0.3rem, 2vw, 0.5rem) clamp(0.5rem, 3vw, 1rem);
   background: var(--primary-bg);
   position: sticky;
   top: 0;
@@ -37,51 +37,47 @@ header {
 
 .header-content {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  left: 330px;
   width: 100%;
-  max-width: 1200px;
-  position: relative; /* For absolute positioning of status-wrapper */
+  max-width: 600px;
+  position: relative;
 }
 
 .status-wrapper {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  text-align: center;
 }
 
 .status-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(0.5rem, 2vw, 1rem);
+  gap: clamp(0.3rem, 2vw, 0.5rem);
   flex-wrap: wrap;
 }
 
 .status, #mode-indicator {
-  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-size: clamp(0.6rem, 2vw, 0.8rem);
   color: var(--text-color);
 }
 
 .social-icons {
   display: flex;
-  gap: clamp(0.3rem, 1vw, 0.5rem);
-  margin-left: auto; /* Pin to right */
+  gap: clamp(0.2rem, 1vw, 0.3rem);
+  margin-top: clamp(0.2rem, 1vw, 0.3rem);
 }
 
 .social-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(32px, 5vw, 36px);
-  height: clamp(32px, 5vw, 36px);
+  width: clamp(28px, 6vw, 32px);
+  height: clamp(28px, 6vw, 32px);
   background: rgba(0, 0, 0, 0.2);
   color: var(--text-color);
   text-decoration: none;
-  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
@@ -103,7 +99,7 @@ main {
 #game-container {
   display: none;
   width: 100vw;
-  height: calc(100vh - clamp(40px, 8vh, 60px));
+  height: calc(100vh - clamp(40px, 10vh, 50px));
   flex-direction: column;
   background: var(--primary-bg);
   overflow: hidden;
@@ -116,7 +112,7 @@ main {
 .split-container {
   flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column; /* Stacked layout for mobile */
   min-height: 0;
   overflow: hidden;
 }
@@ -127,10 +123,10 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(0.3rem, 1vw, 0.75rem);
+  padding: clamp(0.2rem, 1vw, 0.5rem);
   cursor: pointer;
   transition: background-color 0.5s ease, transform 0.2s ease;
-  min-width: 0;
+  min-height: 0;
   position: relative;
 }
 
@@ -154,8 +150,8 @@ main {
 .panel.loading::after {
   content: '';
   position: absolute;
-  width: clamp(16px, 2.5vw, 20px);
-  height: clamp(16px, 2.5vw, 20px);
+  width: clamp(14px, 2.5vw, 16px);
+  height: clamp(14px, 2.5vw, 16px);
   border: 3px solid var(--text-color);
   border-top-color: var(--accent-color);
   border-radius: 50%;
@@ -163,17 +159,17 @@ main {
 }
 
 .divider {
-  width: 2px;
+  height: 2px; /* Horizontal divider for stacked layout */
   background: var(--text-color);
 }
 
 .movie-poster {
-  max-width: min(30vh, 45vw, 300px); /* Increased from 25vh, 40vw, 250px */
+  max-width: min(20vh, 50vw, 200px); /* Smaller for mobile */
   height: auto;
   border-radius: 8px;
-  margin-bottom: clamp(0.3rem, 1.5vw, 0.6rem); 
+  margin-bottom: clamp(0.2rem, 1vw, 0.4rem);
   transition: opacity 0.5s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.534);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .movie-poster.loading {
@@ -181,11 +177,11 @@ main {
 }
 
 .movie-info {
-  font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
   padding: clamp(0.2rem, 1vw, 0.4rem);
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  width: min(90%, 400px);
+  width: min(95%, 300px);
   text-align: center;
   transition: opacity 0.5s ease;
 }
@@ -193,10 +189,10 @@ main {
 .overlay {
   display: none;
   position: fixed;
-  top: clamp(40px, 8vh, 60px);
+  top: clamp(40px, 10vh, 50px);
   left: 0;
   width: 100vw;
-  height: calc(100vh - clamp(40px, 8vh, 60px));
+  height: calc(100vh - clamp(40px, 10vh, 50px));
   background: url("/data/BG.jpg") no-repeat center center/cover;
   background-color: rgba(0, 0, 0, 0.7);
   align-items: center;
@@ -212,40 +208,40 @@ main {
 
 .overlay-content {
   background: rgba(0, 0, 0, 0.8);
-  padding: clamp(0.5rem, 2vw, 1.5rem);
+  padding: clamp(0.3rem, 2vw, 0.75rem);
   border-radius: 12px;
   text-align: center;
-  max-width: min(90%, 600px);
+  max-width: min(90%, 400px);
   z-index: 101;
   animation: scaleIn 0.5s ease;
 }
 
 .start-content {
-  max-width: min(90%, 600px);
+  max-width: min(90%, 400px);
   width: 100%;
 }
 
 .start-content h2 {
-  font-size: clamp(1.2rem, 4vw, 2rem);
-  margin-bottom: clamp(0.3rem, 1vw, 0.75rem);
+  font-size: clamp(1rem, 3.5vw, 1.5rem);
+  margin-bottom: clamp(0.2rem, 1vw, 0.4rem);
 }
 
 .start-content p {
-  font-size: clamp(0.8rem, 2.5vw, 1rem);
-  margin-bottom: clamp(0.5rem, 2vw, 1rem);
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  margin-bottom: clamp(0.3rem, 1.5vw, 0.5rem);
 }
 
 .mode-panels {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(0.3rem, 1vw, 0.75rem);
-  margin-top: clamp(0.3rem, 1vw, 0.75rem);
+  display: flex;
+  flex-direction: column; /* Stacked for mobile */
+  gap: clamp(0.2rem, 1vw, 0.5rem);
+  margin-top: clamp(0.2rem, 1vw, 0.5rem);
 }
 
 .mode-panel {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: clamp(0.5rem, 1.5vw, 1rem);
+  padding: clamp(0.3rem, 1.5vw, 0.5rem);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
@@ -255,40 +251,41 @@ main {
 }
 
 .mode-panel h3 {
-  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
-  margin-bottom: clamp(0.2rem, 1vw, 0.4rem);
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  margin-bottom: clamp(0.1rem, 0.5vw, 0.2rem);
 }
 
 .mode-panel p {
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
-  margin-bottom: clamp(0.3rem, 1vw, 0.75rem);
+  font-size: clamp(0.6rem, 2vw, 0.8rem);
+  margin-bottom: clamp(0.2rem, 1vw, 0.4rem);
+}
+
+.game-note {
+  font-size: clamp(0.6rem, 2vw, 0.8rem);
+  color: var(--text-color);
+  margin-top: clamp(0.3rem, 1.5vw, 0.5rem);
+  text-align: center;
 }
 
 #result-message,
 #game-over-message {
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  margin-bottom: clamp(0.3rem, 1vw, 0.75rem);
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  margin-bottom: clamp(0.2rem, 1vw, 0.4rem);
 }
 
 #previous-guesses {
-  margin: clamp(0.3rem, 1vw, 0.75rem) 0;
-  max-height: 150px;
+  margin: clamp(0.2rem, 1vw, 0.4rem) 0;
+  max-height: 100px;
   overflow-y: auto;
   text-align: left;
 }
 
 .guess-item {
-  margin: clamp(0.2rem, 1vw, 0.4rem) 0;
-  padding: clamp(0.2rem, 1vw, 0.4rem);
+  margin: clamp(0.1rem, 0.5vw, 0.2rem) 0;
+  padding: clamp(0.1rem, 0.5vw, 0.2rem);
   background: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
-}
-
-.game-note {
-  font-size: clamp(0.7rem, 2vw, 0.4rem);
-  color: var(--text-color);
-  margin-top: clamp(0.5rem, 2vw, 1rem);
-  text-align: center;
+  font-size: clamp(0.6rem, 1.8vw, 0.8rem);
 }
 
 #continue-btn,
@@ -296,14 +293,13 @@ main {
 #restart-btn,
 #opening-mode-btn,
 #gross-mode-btn {
-  padding: clamp(0.4rem, 1.5vw, 0.6rem) clamp(0.8rem, 2.5vw, 1.2rem);
+  padding: clamp(0.3rem, 1.5vw, 0.5rem) clamp(0.6rem, 2vw, 0.8rem);
   background: var(--accent-color);
   color: var(--text-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  font-weight: 700;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
   transition: background-color 0.3s ease, transform 0.2s ease;
   z-index: 102;
 }
@@ -323,16 +319,16 @@ main {
 }
 
 .loading {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
   display: flex;
   align-items: center;
-  gap: clamp(0.2rem, 1vw, 0.4rem);
+  gap: clamp(0.1rem, 0.5vw, 0.2rem);
 }
 
 .spinner {
-  width: clamp(14px, 2.5vw, 16px);
-  height: clamp(14px, 2.5vw, 16px);
-  border: 3px solid var(--text-color);
+  width: clamp(12px, 2.5vw, 14px);
+  height: clamp(12px, 2.5vw, 14px);
+  border: 2px solid var(--text-color);
   border-top-color: var(--accent-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -340,14 +336,14 @@ main {
 
 footer {
   text-align: center;
-  padding: clamp(0.2rem, 1vw, 0.4rem);
+  padding: clamp(0.1rem, 0.5vw, 0.2rem);
   background: var(--primary-bg);
-  font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+  font-size: clamp(0.5rem, 1.5vw, 0.6rem);
 }
 
 .version {
   display: inline-block;
-  margin-left: clamp(0.2rem, 1vw, 0.4rem);
+  margin-left: clamp(0.1rem, 0.5vw, 0.2rem);
 }
 
 @keyframes fadeIn {
@@ -382,69 +378,12 @@ footer {
   to { transform: rotate(360deg); }
 }
 
-@media (max-width: 1024px) {
-  .mode-panels {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 480px) {
   .movie-poster {
-    max-width: min(20vh, 35vw, 200px);
-  }
-}
-
-@media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: clamp(0.2rem, 1vw, 0.4rem);
-  }
-  .status-wrapper {
-    position: static;
-    transform: none;
-    width: 100%;
-    text-align: center;
-  }
-  .status-container {
-    justify-content: center;
-    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
-  }
-  .social-icons {
-    margin-left: 0;
-  }
-  .movie-poster {
-    max-width: min(18vh, 45vw, 180px);
+    max-width: min(18vh, 55vw, 160px);
   }
   .movie-info {
-    font-size: clamp(0.7rem, 2vw, 1rem);
-    width: min(95%, 350px);
-  }
-  .panel {
-    padding: clamp(0.2rem, 1vw, 0.5rem);
-  }
-  .mode-panel {
-    padding: clamp(0.3rem, 1.5vw, 0.75rem);
-  }
-}
-
-@media (max-width: 480px) {
-  .status, #mode-indicator {
     font-size: clamp(0.6rem, 1.8vw, 0.8rem);
-  }
-  .movie-poster {
-    max-width: min(16vh, 50vw, 140px);
-  }
-  .start-content h2 {
-    font-size: clamp(1rem, 3.5vw, 1.5rem);
-  }
-  .start-content p {
-    font-size: clamp(0.7rem, 2vw, 0.9rem);
-  }
-  .mode-panel h3 {
-    font-size: clamp(0.8rem, 2vw, 1.1rem);
-  }
-}
-
-@media (min-width: 1920px) {
-  .movie-poster {
-    max-width: min(38vh, 55vw, 400px);
+    width: min(95%, 280px);
   }
 }
