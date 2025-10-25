@@ -45,7 +45,7 @@ header {
 .header-right {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 h1 {
@@ -101,6 +101,7 @@ h1 {
 
 .social-icons {
     display: flex;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -128,6 +129,15 @@ h1 {
 
 [data-theme="dark"] .social-link {
     background: rgba(255, 255, 255, 0.05);
+}
+
+
+.coffee-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.6);
+    margin-left: 0.5rem;
 }
 
 main {
@@ -216,8 +226,6 @@ main {
     position: relative;
 }
 
-
-
 .quote-author {
     font-size: 1.1rem;
     font-weight: 800;
@@ -302,7 +310,6 @@ main {
     object-position: center;
     transition: all 0.3s ease;
     z-index: 0;
-    
 }
 
 .game-card::before {
@@ -353,17 +360,14 @@ main {
 .game-card:hover img {
     transform: scale(1.05);
 }
+
 footer {
     text-align: center;
-    padding: 2rem;
-    font-size: 0.9rem;
+    padding: 1rem;
+    font-size: 0.8rem;
     opacity: 0.6;
     border-top: 1px solid var(--border-color);
-    margin-top: 4rem;
-}
-
-footer p {
-    margin: 0;
+    margin-top: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -376,6 +380,7 @@ footer p {
     .header-right {
         flex-direction: column;
         gap: 0.75rem;
+        align-items: center;
     }
 
     h1 {
@@ -384,12 +389,19 @@ footer p {
 
     .social-icons {
         gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .social-link {
         width: 32px;
         height: 32px;
         font-size: 1rem;
+    }
+
+    .coffee-button {
+        transform: scale(0.9);
+        margin-left: 0;
     }
 
     main {
@@ -416,8 +428,7 @@ footer p {
     }
 
     footer {
-        padding: 1.5rem;
-        margin-top: 2rem;
+        padding: 0.75rem;
+        margin-top: 1.5rem;
     }
 }
-

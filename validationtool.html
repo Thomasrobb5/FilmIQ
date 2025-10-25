@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Media Frame Validator</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    #folderName {
+      font-size: 1.5em;
+      margin: 20px 0;
+      color: #ffcc00;
+    }
+    .frames {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    img {
+      max-height: 180px;
+      border: 2px solid #444;
+      border-radius: 4px;
+    }
+    .hint {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>Media Database Viewer</h1>
+  <div id="folderName">Loading...</div>
+  <div class="frames" id="frameContainer"></div>
+  <div class="hint">Use ← and → arrows to change folder</div>
+
+  <script>
+    let folders = [];
+    let index = 0;
+
+    async function loadData() {
+      const response = await fetch('media_folders.json');
+      folders = await response.json();
+      if (folders.length > 0) showFolder(0);
+    }
+
+    function showFolder(i) {
+      const folder = folders[i];
+      document.getElementById('folderName').textContent = `${i + 1}/${folders.length}: ${folder.folder}`;
+      const container = document.getElementById('frameContainer');
+      container.innerHTML = '';
+      folder.frames.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = folder.folder;
+        container.appendChild(img);
+      });
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') {
+        index = (index + 1) % folders.length;
+        showFolder(index);
+      } else if (e.key === 'ArrowLeft') {
+        index = (index - 1 + folders.length) % folders.length;
+        showFolder(index);
+      }
+    });
+
+    loadData();
+  </script>
+</body>
+</html>

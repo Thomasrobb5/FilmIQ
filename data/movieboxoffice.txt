@@ -1,0 +1,229 @@
+MovieName,ReleaseYear,OpeningWeekendUSD
+Jurassic World,2015,208806270
+Avengers: Age of Ultron,2015,191271109
+Star Wars: The Force Awakens,2015,247966675
+The Hunger Games: Mockingjay - Part 2,2015,102665981
+Spectre,2015,70403148
+Ant-Man,2015,57225526
+Pitch Perfect 2,2015,69216890
+Cinderella,2015,67877361
+The Divergent Series: Insurgent,2015,52263680
+Fifty Shades of Grey,2015,85171450
+The Martian,2015,54308575
+Hotel Transylvania 2,2015,48464322
+San Andreas,2015,54460168
+The Big Short,2015,705527
+Focus,2015,18777228
+Jupiter Ascending,2015,18387723
+The Man from U.N.C.L.E.,2015,13421680
+Pixels,2015,24011762
+Ted 2,2015,33707960
+The Intern,2015,17728904
+Maze Runner: The Scorch Trials,2015,30396809
+Everest,2015,7177680
+Sicario,2015,1207062
+Black Mass,2015,22495037
+Deadpool,2016,132434639
+Zootopia,2016,75063401
+Batman v Superman: Dawn of Justice,2016,166007347
+The Jungle Book,2016,103261464
+Captain America: Civil War,2016,179139142
+Finding Dory,2016,135060273
+The Secret Life of Pets,2016,104352905
+Ghostbusters,2016,46018755
+Jason Bourne,2016,59215365
+Star Trek Beyond,2016,59253211
+X-Men: Apocalypse,2016,65769562
+The Legend of Tarzan,2016,38527856
+The BFG,2016,18775257
+Independence Day: Resurgence,2016,41039944
+Now You See Me 2,2016,22194085
+The Nice Guys,2016,11261234
+The Conjuring 2,2016,40406196
+Neighbors 2: Sorority Rising,2016,21665825
+Alice Through the Looking Glass,2016,26870726
+Warcraft,2016,24166110
+Beauty and the Beast,2017,174750616
+Guardians of the Galaxy Vol. 2,2017,146510104
+Spider-Man: Homecoming,2017,117027503
+Thor: Ragnarok,2017,122744989
+Wonder Woman,2017,103251471
+It,2017,123403419
+Justice League,2017,93842239
+Logan,2017,88411916
+The Fate of the Furious,2017,98786705
+Kong: Skull Island,2017,61025472
+The Lego Batman Movie,2017,53003468
+Get Out,2017,33377060
+The Mummy,2017,31778805
+Kingsman: The Golden Circle,2017,39023010
+John Wick: Chapter 2,2017,30440137
+Baby Driver,2017,20553466
+The Shape of Water,2017,166564
+Jumanji: Welcome to the Jungle,2017,36169328
+The Greatest Showman,2017,8805843
+Pirates of the Caribbean: Dead Men Tell No Tales,2017,62983592
+Cars 3,2017,53688580
+Valerian and the City of a Thousand Planets,2017,17007624
+Dunkirk,2017,50513488
+The Dark Tower,2017,19153175
+The Hitman’s Bodyguard,2017,21384504
+Annabelle: Creation,2017,35006359
+American Assassin,2017,14852999
+King Arthur: Legend of the Sword,2017,15371134
+Black Panther,2018,202003951
+Avengers: Infinity War,2018,257698183
+Deadpool 2,2018,125507153
+Incredibles 2,2018,182687905
+Jurassic World: Fallen Kingdom,2018,148024755
+Aquaman,2018,67873522
+Venom,2018,80255756
+Mission: Impossible – Fallout,2018,61236534
+A Star Is Born,2018,42852051
+Bohemian Rhapsody,2018,51161158
+The Nun,2018,53783300
+Hotel Transylvania 3: Summer Vacation,2018,44191137
+Ocean’s Eight,2018,41557685
+Solo: A Star Wars Story,2018,84228948
+Ant-Man and the Wasp,2018,75812086
+Crazy Rich Asians,2018,26076664
+The Meg,2018,45602927
+Halloween,2018,76087178
+Tomb Raider,2018,23645409
+A Quiet Place,2018,50203343
+Ready Player One,2018,41769050
+Rampage,2018,35753093
+The First Purge,2018,17202460
+Skyscraper,2018,24905015
+Avengers: Endgame,2019,357115007
+Captain Marvel,2019,153433423
+Spider-Man: Far From Home,2019,92579212
+Joker,2019,96202257
+The Lion King,2019,191770759
+Frozen II,2019,130263933
+Toy Story 4,2019,120908065
+Star Wars: The Rise of Skywalker,2019,177383864
+Aladdin,2019,91500929
+Pokémon Detective Pikachu,2019,54352499
+Shazam!,2019,53505440
+Dumbo,2019,45990748
+Glass,2019,40344605
+Knives Out,2019,26769281
+Once Upon a Time in Hollywood,2019,41082015
+Maleficent: Mistress of Evil,2019,36480687
+Godzilla: King of the Monsters,2019,47837494
+How to Train Your Dragon: The Hidden World,2019,55022145
+Rocketman,2019,25650000
+The Secret Life of Pets 2,2019,47113590
+Men in Black: International,2019,30036728
+Fast & Furious Presents: Hobbs & Shaw,2019,60038950
+John Wick: Chapter 3 – Parabellum,2019,56818315
+Us,2019,71217930
+Sonic the Hedgehog,2020,58018500
+Birds of Prey,2020,33010401
+The Invisible Man,2020,28205340
+Tenet,2020,9200000
+Wonder Woman 1984,2020,16100000
+The New Mutants,2020,7051692
+Bad Boys for Life,2020,62504232
+Spider-Man: No Way Home,2021,260138569
+Shang-Chi and the Legend of the Ten Rings,2021,75388899
+Venom: Let There Be Carnage,2021,90033210
+Black Widow,2021,80366312
+F9,2021,70043165
+Eternals,2021,71107234
+No Time to Die,2021,55225007
+A Quiet Place Part II,2021,47497300
+Free Guy,2021,28365587
+Jungle Cruise,2021,35018731
+The Suicide Squad,2021,26531092
+Dune,2021,41011174
+Ghostbusters: Afterlife,2021,44008796
+The Matrix Resurrections,2021,10600000
+The Conjuring: The Devil Made Me Do It,2021,24062485
+Cruella,2021,21360831
+The Forever Purge,2021,12764475
+Space Jam: A New Legacy,2021,31053362
+The French Dispatch,2021,1320000
+The Batman,2022,134008624
+Doctor Strange in the Multiverse of Madness,2022,187420998
+Thor: Love and Thunder,2022,144165107
+Jurassic World Dominion,2022,145075625
+Top Gun: Maverick,2022,126707459
+Minions: The Rise of Gru,2022,107010140
+Elvis,2022,31162828
+Nope,2022,44069330
+Black Panther: Wakanda Forever,2022,181339761
+Avatar: The Way of Water,2022,134100226
+Puss in Boots: The Last Wish,2022,12462276
+The Menu,2022,9009381
+Violent Night,2022,13450095
+The Whale,2022,332430
+Babylon,2022,3610327
+The Fabelmans,2022,161579
+Everything Everywhere All at Once,2022,501131
+Sonic the Hedgehog 2,2022,72131019
+Lightyear,2022,50707164
+Bullet Train,2022,30058158
+Don’t Worry Darling,2022,19325853
+Barbie,2023,162022044
+Oppenheimer,2023,82132530
+The Super Mario Bros. Movie,2023,146361865
+Guardians of the Galaxy Vol. 3,2023,118414021
+Spider-Man: Across the Spider-Verse,2023,120066392
+The Little Mermaid,2023,95618321
+Mission: Impossible – Dead Reckoning Part One,2023,54805832
+Indiana Jones and the Dial of Destiny,2023,60288065
+Elemental,2023,29603748
+Fast X,2023,67626785
+The Flash,2023,55146318
+Transformers: Rise of the Beasts,2023,61045864
+The Hunger Games: The Ballad of Songbirds & Snakes,2023,44540258
+Wonka,2023,39005187
+The Marvels,2023,46110859
+Killers of the Flower Moon,2023,23202394
+The Creator,2023,14150161
+Five Nights at Freddy’s,2023,80001347
+The Equalizer 3,2023,34604030
+Gran Turismo,2023,17311284
+Blue Beetle,2023,25191635
+Meg 2: The Trench,2023,30079330
+Haunted Mansion,2023,24187792
+Dune: Part Two,2024,82505391
+Godzilla x Kong: The New Empire,2024,80006801
+Kung Fu Panda 4,2024,58127905
+Ghostbusters: Frozen Empire,2024,45004358
+The Ministry of Ungentlemanly Warfare,2024,8750000
+Civil War,2024,25667624
+The Fall Guy,2024,27850000
+Kingdom of the Planet of the Apes,2024,58130000
+Furiosa: A Mad Max Saga,2024,25854952
+Bad Boys: Ride or Die,2024,56265000
+Inside Out 2,2024,154201673
+A Quiet Place: Day One,2024,52457193
+Horizon: An American Saga – Chapter 1,2024,11088562
+Twisters,2024,80339005
+Deadpool & Wolverine,2024,211400000
+It Ends with Us,2024,50016801
+Alien: Romulus,2024,41796626
+The Bikeriders,2024,9993959
+Fly Me to the Moon,2024,9461157
+Longlegs,2024,22320222
+MaXXXine,2024,6711571
+Despicable Me 4,2024,74909095
+Transformers One,2024,24975543
+Beetlejuice Beetlejuice,2024,110003317
+Speak No Evil,2024,11250935
+The Wild Robot,2024,35605865
+Joker: Folie à Deux,2024,37228035
+Venom: The Last Dance,2024,TBD
+Smile 2,2024,23077613
+Conclave,2024,TBD
+Mufasa: The Lion King,2024,TBD
+Nosferatu,2024,TBD
+A Complete Unknown,2024,TBD
+The Lord of the Rings: The War of the Rohirrim,2024,TBD
+Sonic the Hedgehog 3,2024,TBD
+Kraven the Hunter,2024,TBD
+The Gorge,2024,TBD
+Red One,2024,TBD

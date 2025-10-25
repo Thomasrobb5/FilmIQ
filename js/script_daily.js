@@ -49,7 +49,7 @@ const stageMedia = {
 // Stages labels (updated for 30s audio in Stage 1)
 const stageLabels = [
   '', 
-  'Very Hard: 30-second audio clip', 
+  'Very Hard: 20-second audio clip', 
   'Hard: 5 random still frames', 
   'Medium: 8-second video clip', 
   'Easy: 30-second video clip'
@@ -81,12 +81,12 @@ const monthYear = document.getElementById('month-year');
 let currentYear = currentDate.getFullYear();
 let currentMonth = currentDate.getMonth();
 
-// Guard against null DOM elements
-if (!guessInput || !submitBtn || !revealEl /* add others as needed */) {
+
+if (!guessInput || !submitBtn || !revealEl) {
   console.error('Critical DOM elements missing. Check HTML.');
 }
 
-// Timer functions
+
 function updateTimer() {
   const now = new Date();
   const tomorrow = new Date(now);
@@ -95,7 +95,7 @@ function updateTimer() {
   
   const diff = tomorrow - now;
   if (diff <= 0) {
-    // If somehow past midnight, reset to today +1
+    
     tomorrow.setDate(tomorrow.getDate() + 1);
     tomorrow.setHours(0, 0, 0, 0);
   }
@@ -105,7 +105,7 @@ function updateTimer() {
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
   
   if (nextPuzzleEl) {
-    nextPuzzleEl.textContent = `Next puzzle in: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    nextPuzzleEl.textContent = `Next movie in: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 }
 

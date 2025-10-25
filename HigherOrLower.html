@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="FilmIQ Higher or Lower - Guess which movie has the higher box office earnings in this fun streak challenge!" />
+    <title>FilmIQ - Higher or Lower</title>
+    <link rel="stylesheet" href="/css/styles_HOR.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/data/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/data/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/data/favicon-16x16.png">
+    <link rel="manifest" href="/data/site.webmanifest">
+  </head>
+  <body>
+    <header role="banner">
+      <div class="header-content">
+        <div class="status-container" style="display: none;">
+          <div id="mode-indicator" aria-live="polite"></div>
+          <div id="current-streak" class="status">Current Streak: 0</div>
+          <div id="max-streak" class="status">Max Streak: 0</div>
+        </div>
+        <div class="social-icons">
+          <a href="/index.html" aria-label="Home" title="Home" class="social-link">🏠</a>
+          <a href="https://x.com/FilmIQ_App" aria-label="X/Twitter" title="X/Twitter" class="social-link">𝕏</a>
+          <a href="mailto:thomasrobb5@gmail.com" aria-label="Email" title="Email" class="social-link">✉</a>
+          <a href="https://www.linkedin.com/in/tom-robb-89b17117b/" aria-label="LinkedIn" title="LinkedIn" class="social-link">in</a>
+        </div>
+      </div>
+    </header>
+    <main role="main">
+      <div id="game-container">
+        <div class="split-container">
+          <div id="top-panel" class="panel" role="button" tabindex="0" aria-label="Select top movie">
+            <div class="poster-container">
+              <img id="poster-a" class="movie-poster" src="/data/placeholder.jpg" alt="Movie A poster">
+            </div>
+            <div id="movie-a-info" class="movie-info"></div>
+          </div>
+          <div class="divider"></div>
+          <div id="bottom-panel" class="panel" role="button" tabindex="0" aria-label="Select bottom movie">
+            <div class="poster-container">
+              <img id="poster-b" class="movie-poster" src="/data/placeholder.jpg" alt="Movie B poster">
+            </div>
+            <div id="movie-b-info" class="movie-info"></div>
+          </div>
+        </div>
+        <div id="result-overlay" class="overlay">
+          <div class="overlay-content">
+            <div id="result-message" aria-live="assertive"></div>
+            <button id="continue-btn" type="button" disabled>Continue</button>
+          </div>
+        </div>
+        <div id="game-over-screen" class="overlay">
+          <div class="overlay-content">
+            <div id="game-over-message" aria-live="assertive"></div>
+            <div id="previous-guesses"></div>
+            <button id="share-btn" type="button">Share Score</button>
+            <button id="restart-btn" type="button">Restart Game</button>
+          </div>
+        </div>
+        <div id="loading-screen" class="overlay">
+          <div class="overlay-content">
+            <div class="loading">Loading<span class="spinner"></span></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer role="contentinfo">
+      <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
+      <span class="version">v1.0.0</span>
+    </footer>
+<div id="start-screen" class="overlay show">
+  <div class="overlay-content">
+    <h2>FilmIQ Higher or Lower</h2>
+    <p>Guess which movie has the higher box office earnings!</p>
+    <div class="mode-panels">
+      <div class="mode-panel" role="region" aria-label="Opening Weekend Mode">
+        <h3>Opening Weekend</h3>
+        <p>Compare movies based on their opening weekend box office earnings. Test your knowledge of blockbuster debuts!</p>
+        <button id="opening-mode-btn" type="button">Play Opening Weekend</button>
+      </div>
+      <div class="mode-panel" role="region" aria-label="Lifetime Gross Mode">
+        <h3>Lifetime Gross</h3>
+        <p>Guess which movie earned more over its entire theatrical run. Can you spot the all-time box office champs?</p>
+        <button id="gross-mode-btn" type="button">Play Lifetime Gross</button>
+      </div>
+    </div>
+    <p class="game-note">Note: Box office earnings are based on the Domestic market (U.S. and Canada) only, not worldwide.</p>
+  </div>
+</div>
+    <script src="/js/script_HOR.js"></script>
+  </body>
+</html>
