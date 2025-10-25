@@ -43,7 +43,7 @@ const stageMedia = {
 // Stages labels (updated for 30s audio in Stage 1)
 const stageLabels = [
   '', 
-  'Very Hard: 30-second audio clip', 
+  'Very Hard: 20-second audio clip', 
   'Hard: 5 random still frames', 
   'Medium: 8-second video clip', 
   'Easy: 30-second video clip'
