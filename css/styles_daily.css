@@ -673,5 +673,56 @@ footer p {
 }
 
 .celebration-message {
-  animation: pulse 1s infinite; /* Fallback if JS inline fails */
+  animation: pulse 1s infinite;
+}
+
+
+.ad-banner {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 600px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+
+.ad-left {
+  left: 10px; 
+}
+
+.ad-right {
+  right: 10px;
+}
+
+.ad-placeholder {
+  color: #fff;
+  font-size: 1em;
+  text-align: center;
+  padding: 10px;
+}
+
+@media (max-width: 1000px) {
+  .ad-banner {
+    display: none;
+  }
+}
+
+.ad-mobile {
+  display: none;
+  width: 320px;
+  height: 100px;
+  margin: 20px auto;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+@media (max-width: 1000px) {
+  .ad-mobile {
+    display: block;
+  }
 }
