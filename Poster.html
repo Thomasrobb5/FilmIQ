@@ -1,85 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tom.Fun</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Guess the Movie Poster Game" />
+    <title>FilmIQ - Guess the Movie Poster</title>
+    <link rel="stylesheet" href="css/styles_poster.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./data/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./data/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./data/favicon-16x16.png">
+    <link rel="manifest" href="./data/site.webmanifest">
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background-image: url("./data/BG.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+        background-color: #303030;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
     <header>
-        <h1></h1>
-        <div class="header-right">
-            <div class="toggle-container">
-                <label for="theme-toggle">Dark Mode</label>
-                <label class="toggle">
-                    <input type="checkbox" id="theme-toggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="social-icons">
-                <a href="https://x.com/yourhandle" aria-label="X/Twitter" class="social-link">𝕏</a>
-                <a href="mailto:your.email@example.com" aria-label="Email" class="social-link">✉</a>
-                <a href="https://linkedin.com/in/yourhandle" aria-label="LinkedIn" class="social-link">in</a>
-            </div>
+      <h4>Guess the Movie Poster</h4>
+      <div class="header-right">
+        <div class="social-icons">
+          <a href="./index.html" aria-label="Home" title="Home" class="social-link">🏠︎</a>
+          <a href="https://x.com/FilmIQ_App" aria-label="X/Twitter" title="X/Twitter" class="social-link">𝕏</a>
+          <a href="mailto:thomasrobb5@gmail.com" aria-label="Email" title="Email" class="social-link">✉</a>
+          <a href="https://www.linkedin.com/in/tom-robb-89b17117b/" aria-label="LinkedIn" title="LinkedIn" class="social-link">in</a>
         </div>
+      </div>
     </header>
-
     <main>
-<section class="hero">
-    <div class="logo-container">
-        <div class="logo-text">
-            <div class="small">The world of</div>
-            <div class="large">Tom J Robb</div>
+      <div id="streak-container">
+        <p>Current Streak: <span id="current-streak">0</span> | Best Streak: <span id="best-streak">0</span></p>
+      </div>
+      <div id="game-container">
+        <div id="reveal"></div>
+        <div id="stage-indicator">Stage 1: 5/400 squares revealed</div>
+        <div id="poster-container">
+          <div id="loading-indicator">Loading poster...</div>
+          <div id="poster-grid"></div>
+          <img id="poster-image" alt="Movie poster" style="display: none;" />
         </div>
-    </div>
-    <p class="collection-text">A collection of games and experiences.</p>
-
-</section>
-
-    <blockquote id="daily-quote" class="quote">
-        <q id="quote-content">Loading daily movie quote...</q>
-        <footer id="quote-author" class="quote-author"></footer>
-    </blockquote>
-      <h2 class="section-title">Games</h2>
-<div class="games-grid">
-    <a href="https://filmiq.app/" class="game-card" alt="FilmIQ">
-        <img src="game_thumbnails/game2.png" alt="FilmIQ thumbnail" loading="lazy">
-        
-    </a>
-    <a href="#" class="game-card" alt="Pixel Puzzle">
-        <img src="game_thumbnails/game3.png" alt="Pixel Puzzle thumbnail" loading="lazy">
-        
-    </a>
-    <a href="#" class="game-card" alt="Word Wizard">
-        <img src="game_thumbnails/game6.png" alt="Word Wizard thumbnail" loading="lazy">
-        
-    </a>
-    <a href="#" class="game-card" alt="Time Traveler">
-        <img src="game_thumbnails/game1.png" alt="Time Traveler thumbnail" loading="lazy">
-        
-    </a>
-    <a href="#" class="game-card" alt="Dream Weaver">
-        <img src="game_thumbnails/game7.png" alt="Dream Weaver thumbnail" loading="lazy">
-        
-    </a>
-    <a href="#" class="game-card" alt="Dream Weaver">
-        <img src="game_thumbnails/null.png" alt="Dream Weaver thumbnail" loading="lazy">
-        
-    </a>
-</div>
+        <div id="input-container">
+          <input type="text" id="guess-input" placeholder="Guess the movie title..." />
+          <div id="dropdown" class="dropdown"></div>
+          <button id="submit-btn">Submit Guess</button>
         </div>
+        <div id="previous-guesses"></div>
+        <div id="score"></div>
+        <button id="share-btn" style="display: none;">Share Score</button>
+      </div>
     </main>
-
     <footer>
-        <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
-        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="TomJRobb" data-color="#FF5F5F" data-emoji="📽️"  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+      <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
+      <div id="VersionNumber" class="VersionNumber"> v1.0.0 </div>
     </footer>
-    </main>
-
-    <script src="js/main.js"></script>
-</body>
+    <div id="start-screen">
+      <div class="start-content">
+        <h2>FilmIQ - Guess the Movie Poster</h2>
+        <div id="start-loading" style="display: none;">Loading poster...</div>
+        <p>Guess the movie in 5 stages:</p>
+        <ul class="introtext">
+          <li>Stage 1: 20/400 squares revealed - 5 points</li>
+          <li>Stage 2: 35/400 squares revealed - 4 points</li>
+          <li>Stage 3: 50/400 squares revealed - 3 points</li>
+          <li>Stage 4: 100/400 squares revealed - 2 points</li>
+          <li>Stage 5: 200/400 squares revealed - 1 point</li>
+        </ul>
+        <p>Keep guessing to build your streak!</p>
+        <button id="play-start-btn">Play</button>
+      </div>
+    </div>
+    <script src="js/script_poster.js"></script>
+  </body>
 </html>

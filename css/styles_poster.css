@@ -1,0 +1,631 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 3rem;
+  background: rgba(0, 0, 0, 0.514);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.social-icons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(0, 0, 0, 0.05);
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+footer {
+  text-align: center;
+  padding: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 0.7em;
+}
+
+footer p {
+  margin: 5px;
+  color: #ffffff;
+}
+
+#game-container {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  padding: 20px; /* Reduced padding */
+  max-width: 700px; /* Reduced from 800px */
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#streak-container {
+  font-size: 1.1em;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.425);
+  padding: 12px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 600px;
+}
+
+#stage-indicator {
+  font-size: 1.8em; /* Adjusted for better fit */
+  margin-bottom: 15px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+#poster-container {
+  margin: 20px auto; /* Reduced margin */
+  width: 100%;
+  max-width: 350px; /* Reduced from 400px */
+  aspect-ratio: 2 / 3;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#poster-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#poster-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  z-index: 2;
+}
+
+.grid-square {
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: opacity 0.5s ease;
+}
+
+.grid-square.revealed {
+  opacity: 0;
+}
+
+#loading-indicator {
+  font-size: 1.1em; /* Slightly smaller */
+  color: #ffffff;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+#input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0; /* Reduced margin */
+  position: relative;
+  width: 100%;
+  max-width: 700px; /* Match game-container */
+}
+
+#guess-input {
+  padding: 8px; /* Slightly reduced */
+  font-size: 1.1em; /* Slightly smaller */
+  border: none;
+  border-radius: 5px;
+  flex: 1;
+  min-width: 200px;
+}
+
+#submit-btn {
+  padding: 8px 16px; /* Slightly reduced */
+  font-size: 1.1em; /* Slightly smaller */
+  background: #525252;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#submit-btn:hover {
+  background: #383838;
+  color: rgb(255, 255, 255);
+  transition: all 0.2s ease;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 80%;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 5px;
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 15;
+  display: none;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown li {
+  padding: 8px; /* Slightly reduced */
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown li:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown li:last-child {
+  border-bottom: none;
+}
+
+#previous-guesses {
+  margin-top: 15px; /* Reduced */
+  text-align: left;
+  max-width: 600px;
+  width: 100%;
+}
+
+.guess-item {
+  margin: 5px 0;
+  padding: 5px;
+  width: 115%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.skip-item {
+  margin: 5px 0;
+  padding: 5px;
+  width: 115%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  color: #FFDD00;
+}
+
+#score {
+  font-size: 1.4em; /* Slightly smaller */
+  margin-top: 15px;
+  color: #ffffff;
+}
+
+#reveal {
+  display: none;
+  text-align: center;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f9f9f911;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  transition: opacity 0.3s ease;
+  max-width: 670px; /* Match game-container */
+  width: 100%;
+}
+
+#reveal .movie-poster {
+  max-width: 250px; /* Reduced for 1080p */
+  max-height: 375px;
+  width: auto;
+  height: auto;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+#reveal strong {
+  font-size: 22px; /* Slightly smaller */
+  color: #ffffff;
+  display: block;
+}
+
+#share-btn, #next-btn {
+  margin: 15px auto;
+  display: block;
+  width: fit-content;
+  padding: 8px 16px;
+  background: #ffffff;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9em; /* Slightly smaller */
+}
+
+#start-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.start-content {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 20px; /* Reduced */
+  max-width: 500px; /* Reduced */
+  text-align: center;
+  color: #fff;
+}
+
+.start-content h2 {
+  font-size: 1.8em; /* Adjusted */
+  margin-bottom: 15px;
+}
+
+.start-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px;
+  text-align: left;
+}
+
+.start-content li {
+  margin: 8px 0; /* Reduced */
+}
+
+#start-loading {
+  color: #FF5F5F;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#play-start-btn {
+  padding: 8px 16px; /* Reduced */
+  background: #FF5F5F;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em; /* Slightly smaller */
+}
+
+#play-start-btn:hover {
+  background: #e02222;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.celebration-message {
+  animation: pulse 1s infinite;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For 1080p screens (up to 1440px wide) */
+@media (max-width: 1440px) {
+  #game-container {
+    max-width: 600px; /* Further reduced for 1080p */
+    padding: 15px;
+  }
+
+  #poster-container {
+    max-width: 300px; /* Smaller poster */
+  }
+
+  #stage-indicator {
+    font-size: 1.6em;
+  }
+
+  #streak-container {
+    font-size: 1em;
+    padding: 10px;
+  }
+
+  #input-container {
+    max-width: 600px;
+  }
+
+  #guess-input {
+    font-size: 1em;
+    padding: 8px;
+  }
+
+  #submit-btn {
+    font-size: 1em;
+    padding: 8px 16px;
+  }
+
+  #reveal {
+    max-width: 600px;
+    padding: 12px;
+  }
+
+  #reveal .movie-poster {
+    max-width: 200px;
+    max-height: 300px;
+  }
+
+  #reveal strong {
+    font-size: 20px;
+  }
+
+  .start-content {
+    max-width: 450px;
+    padding: 15px;
+  }
+
+  .start-content h2 {
+    font-size: 1.6em;
+  }
+}
+
+/* For screens up to 1024px (smaller desktops, large tablets) */
+@media (max-width: 1024px) {
+  header {
+    padding: 0.3rem 2rem;
+  }
+
+  #game-container {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  #poster-container {
+    max-width: 280px;
+  }
+
+  #stage-indicator {
+    font-size: 1.4em;
+  }
+
+  #guess-input {
+    font-size: 1em;
+  }
+
+  #submit-btn {
+    font-size: 1em;
+  }
+
+  .start-content {
+    padding: 15px;
+    max-width: 80%;
+  }
+}
+
+/* For screens up to 768px (tablets) */
+@media (max-width: 768px) {
+  header {
+    padding: 0.3rem 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header-right {
+    margin-top: 0.5rem;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  #game-container {
+    padding: 12px;
+    border-radius: 15px;
+  }
+
+  #streak-container {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  #stage-indicator {
+    font-size: 1.3em;
+    white-space: normal;
+  }
+
+  #poster-container {
+    max-width: 250px;
+    margin: 15px auto;
+  }
+
+  #input-container {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+  }
+
+  #guess-input {
+    min-width: auto;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  #submit-btn {
+    width: 100%;
+  }
+
+  #previous-guesses {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  #reveal {
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  #reveal .movie-poster {
+    max-width: 200px;
+    max-height: 300px;
+  }
+
+  #reveal strong {
+    font-size: 18px;
+  }
+
+  .start-content {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .start-content h2 {
+    font-size: 1.5em;
+  }
+
+  .start-content li {
+    font-size: 0.85em;
+  }
+
+  footer {
+    font-size: 0.6em;
+    padding: 5px;
+  }
+}
+
+/* For screens up to 480px (mobile phones) */
+@media (max-width: 480px) {
+  header {
+    padding: 0.3rem 1rem;
+  }
+
+  .social-link {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+
+  #game-container {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  #streak-container {
+    font-size: 0.85em;
+    padding: 8px;
+  }
+
+  #stage-indicator {
+    font-size: 1.1em;
+  }
+
+  #poster-container {
+    max-width: 100%;
+    margin: 10px auto;
+  }
+
+  #guess-input {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  #submit-btn {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+
+  .dropdown {
+    width: 100%;
+    left: 0;
+  }
+
+  #reveal {
+    padding: 10px;
+  }
+
+  #reveal .movie-poster {
+    max-width: 180px;
+    max-height: 270px;
+  }
+
+  #reveal strong {
+    font-size: 16px;
+  }
+
+  .start-content {
+    padding: 12px;
+  }
+
+  .start-content h2 {
+    font-size: 1.4em;
+  }
+
+  #play-start-btn {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+
+  footer {
+    font-size: 0.5em;
+  }
+}
