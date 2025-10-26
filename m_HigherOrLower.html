@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="FilmIQ Higher or Lower - Guess which movie has the higher box office earnings!" />
-    <title>FilmIQ - Higher or Lower (Mobile)</title>
-    <link rel="stylesheet" href="/css/m_styles_HOR.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/data/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/data/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/data/favicon-16x16.png">
-    <link rel="manifest" href="/data/site.webmanifest">
-    <script>
-      // Redirect to index.html if not a mobile device
-      if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        window.location.href = '/HigherOrLower.html';
-      }
-    </script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="FilmIQ Higher or Lower - Guess which movie has the higher box office earnings!" />
+  <title>FilmIQ - Higher or Lower (Mobile)</title>
+  <link rel="stylesheet" href="/css/m_styles_HOR.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/data/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/data/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/data/favicon-16x16.png">
+  <link rel="manifest" href="/data/site.webmanifest">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-48CXR6T500"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-48CXR6T500');
+  </script>
+  <script>
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      window.location.href = '/HigherOrLower.html';
+    }
+  </script>
+</head>
   <body>
     <header role="banner">
       <div class="header-content">
