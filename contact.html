@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore Tom J Robb's collection of games and experiences, including Film IQ and more.">
-    <title>Tom J Robb</title>
+    <title>Contact - Tom J Robb</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
@@ -13,19 +12,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./data/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./data/favicon-16x16.png">
     <link rel="manifest" href="./data/site.webmanifest">
-    
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-48CXR6T500"></script>
     <script>
-        function isMobileDevice() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-        }
-
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        if (isMobileDevice() && currentPath !== 'm_index.html') {
-            setTimeout(() => { window.location.href = 'm_index.html'; }, 100);
-        } else if (!isMobileDevice() && currentPath === 'm_index.html') {
-            setTimeout(() => { window.location.href = 'index.html'; }, 100);
-        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-48CXR6T500');
     </script>
 </head>
 <body>
@@ -46,7 +39,6 @@
             <li><a href="sitemap.html" aria-label="Sitemap">Sitemap</a></li>
         </ul>
     </nav>
-    
     <div class="header-right">
         <div class="toggle-container">
             <label for="theme-toggle" class="sr-only">Toggle Dark Mode</label>
@@ -75,59 +67,40 @@
         </div>
     </div>
 </header>
-
-    <main role="main">
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="logo-container">
-                <div class="logo-text">
-                    <div class="small">The world of</div>
-                    <h1 class="large" id="hero-title">Tom J Robb</h1>
-                </div>
+<main>
+    <section class="hero">
+        <div class="logo-container">
+            <div class="logo-text">
+                <div class="small"></div>
+                <div class="large">Contact Us</div>
             </div>
-            <p class="collection-text">A collection of games and experiences.</p>
-        </section>
-        <blockquote id="daily-quote" class="quote" aria-live="polite">
-            <div class="quote-loading" aria-hidden="true">Loading...</div>
-            <q id="quote-content">Loading daily movie quote...</q>
-            <footer id="quote-author" class="quote-author"></footer>
-            <div id="quote-source" class="quote-source"></div>
-        </blockquote>
-        <h2 class="section-title">Games</h2>
-        <div class="games-grid">
-            <a href="Daily.html" class="game-card" aria-label="Film IQ - Daily">
-                <img src="game_thumbnails/game_daily.png" alt="Film IQ - Daily Game Thumbnail" loading="lazy">
-                <h3>Film IQ - Daily</h3>
-            </a>
-            <a href="Endless.html" class="game-card" aria-label="Film IQ - Endless">
-                <img src="game_thumbnails/game_endless.png" alt="Film IQ - Endless Game Thumbnail" loading="lazy">
-                <h3>Film IQ - Endless</h3>
-            </a>
-            <a href="HigherOrLower.html" class="game-card" aria-label="Film IQ - Box Office - Higher or Lower">
-                <img src="game_thumbnails/game_HigherOrLower2.png" alt="Film IQ - Box Office - Higher or Lower Game Thumbnail" loading="lazy">
-                <h3>Film IQ - Box Office</h3>
-            </a>
-            <a href="Poster.html" class="game-card" aria-label="Film IQ - Guess The Poster">
-                <img src="game_thumbnails/game_poster.png" alt="Film IQ - Guess The Poster Game Thumbnail" loading="lazy">
-                <h3>Film IQ - Poster</h3>
-            </a>
         </div>
-    </main>
+        <p class="collection-text">We’re here to assist and collaborate.</p>
+    </section>
+    <section class="content">
+        <h1>Contact Us</h1>
+        <p>Have questions, feedback, or ideas about FilmIQ? We’d love to hear from you! Please use the form below to get in touch, or reach out directly via email at <a href="mailto:thomasrobb5@gmail.com" class="inline-link">thomasrobb5@gmail.com</a>. Your input helps shape the future of this project!</p>
 
-<footer role="contentinfo">
-                    <div class="coffee-button">
-                <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
-                        data-name="bmc-button" 
-                        data-slug="TomJRobb" 
-                        data-color="#FF5F5F" 
-                        data-emoji="📽️" 
-                        data-font="Cookie" 
-                        data-text="Buy me some Popcorn" 
-                        data-outline-color="#000000" 
-                        data-font-color="#ffffff" 
-                        data-coffee-color="#FFDD00"></script>
-                        
+        <form class="contact-form" action="https://formspree.io/f/xvgvrnye" method="POST">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name" aria-required="true">
             </div>
-    <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email" aria-required="true">
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" required placeholder="Share your thoughts or questions" rows="6" aria-required="true"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+
+    </section>
+</main>
+<footer role="contentinfo">
+   <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
 </footer>
 
 <!-- --- AUTH MODAL --- -->
@@ -146,7 +119,6 @@
     <button id="auth-close" type="button" class="close-modal">✖</button>
   </div>
 </div>
-
 <script src="js/main.js"></script>
 </body>
 </html>

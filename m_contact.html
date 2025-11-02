@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Tom J Robb</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./data/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./data/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./data/favicon-16x16.png">
+    <link rel="manifest" href="./data/site.webmanifest">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-48CXR6T500"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-48CXR6T500');
+    </script>
+</head>
+<body>
+<header role="banner">
+        <a href="m_index.html" class="logo-link" aria-label="Tom J Robb Home">
+            <img src="./data/android-chrome-192x192.png" alt="Tom J Robb Logo" class="logo">
+        </a>
+        <button class="hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false">
+            <span class="hamburger-icon"></span>
+        </button>
+        <nav class="nav-menu" role="navigation">
+            <ul>
+                <li><a href="m_index.html" aria-label="Home">Home</a></li>
+                <li><a href="m_about.html" aria-label="About">About</a></li>
+                <li><a href="m_privacy-policy.html" aria-label="Privacy Policy">Privacy Policy</a></li>
+                <li><a href="m_contact.html" aria-label="Contact Us">Contact Us</a></li>
+                <li><a href="m_sitemap.html" aria-label="Sitemap">Sitemap</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="toggle-container">
+                <label for="theme-toggle" class="sr-only">Toggle Dark Mode</label>
+                <label class="toggle">
+                    <input type="checkbox" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+<main>
+    <section class="hero">
+        <div class="logo-container">
+            <div class="logo-text">
+                <div class="small"></div>
+                <div class="large">Contact Us</div>
+            </div>
+        </div>
+        <p class="collection-text">We’re here to assist and collaborate.</p>
+    </section>
+    <section class="content">
+        <h1>Contact Us</h1>
+        <p>Have questions, feedback, or ideas about FilmIQ? We’d love to hear from you! Please use the form below to get in touch, or reach out directly via email at <a href="mailto:thomasrobb5@gmail.com" class="inline-link">thomasrobb5@gmail.com</a>. Your input helps shape the future of this project!</p>
+
+        <form class="contact-form" action="https://formspree.io/f/xvgvrnye" method="POST">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name" aria-required="true">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email" aria-required="true">
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" required placeholder="Share your thoughts or questions" rows="6" aria-required="true"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+
+    </section>
+</main>
+<footer role="contentinfo">
+   <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
+</footer>
+<script src="js/mobile.js"></script>
+</body>
+</html>
