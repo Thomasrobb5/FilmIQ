@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Helper function for mobile detection (moved from head)
+    function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    }
+
+    // Mobile/Desktop Redirect Logic (moved here to run after DOM load)
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    if (isMobileDevice() && currentPath !== 'm_index.html') {
+        setTimeout(() => { window.location.href = 'm_index.html'; }, 100);
+        return;  // Exit early to avoid running desktop content on mobile
+    } else if (!isMobileDevice() && currentPath === 'm_index.html') {
+        setTimeout(() => { window.location.href = 'index.html'; }, 100);
+        return;  // Exit early
+    }
+
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
     const toggleIcon = themeToggle.querySelector('.toggle-icon');
@@ -199,12 +214,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const isHomePage = ['index.html', 'm_index.html'].includes(window.location.pathname.split('/').pop());
+    const isHomePage = ['index.html', 'm_index.html'].includes(currentPath);
+    console.log('Daily quote element:', document.getElementById('daily-quote'));  // Debug log
+    console.log('isHomePage:', isHomePage);  // Debug log
+    console.log('Will load quote?', document.getElementById('daily-quote') && isHomePage);  // Debug log
+
     if (document.getElementById('daily-quote') && isHomePage) {
         loadDailyQuote();
     }
 
     function selectAndSetQuote(quotes, todayStr, cacheKey, contentEl, authorEl, sourceEl, quoteBlock) {
+        if (!quotes || quotes.length === 0) {
+            console.warn('No quotes available, falling back.');  // Additional debug
+            fallbackQuote(contentEl, authorEl, sourceEl, quoteBlock);
+            return;
+        }
+        
         const now = new Date(todayStr);
         const start = new Date(now.getFullYear(), 0, 0);
         let dayOfYear = Math.floor((now - start) / 86400000);
@@ -216,6 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = { content: selected.quote, author: selected.author, source: selected.source };
         localStorage.setItem(cacheKey, JSON.stringify(data));
         quoteBlock.setAttribute('aria-busy', 'false');
+        console.log('Quote loaded:', selected.quote.substring(0, 50) + '...');  // Debug log
     }
 
     function fallbackQuote(contentEl, authorEl, sourceEl, quoteBlock) {
@@ -223,21 +249,22 @@ document.addEventListener('DOMContentLoaded', () => {
         authorEl.textContent = "— Obi-Wan Kenobi";
         sourceEl.textContent = "Star Wars: Episode IV – A New Hope";
         quoteBlock.setAttribute('aria-busy', 'false');
+        console.log('Fallback quote set.');  // Debug log
     }
 
     const API_URL = "https://auth-backend.thomasrobb5.workers.dev";
 
     // JWT Decode Helper (client-side, no verification)
-function decodeJWT(token) {
-  try {
-    const payload = token.split('.')[1];
-    const decoded = JSON.parse(atob(payload));
-    return decoded.displayName || null;
-  } catch (err) {
-    console.warn('JWT decode failed:', err);
-    return null;
-  }
-}
+    function decodeJWT(token) {
+        try {
+            const payload = token.split('.')[1];
+            const decoded = JSON.parse(atob(payload));
+            return decoded.displayName || null;
+        } catch (err) {
+            console.warn('JWT decode failed:', err);
+            return null;
+        }
+    }
 
     // Header elements
     const signInBtn = document.getElementById('sign-in-btn');
@@ -300,31 +327,31 @@ function decodeJWT(token) {
         });
     }
 
+    // Open modal
+    if (signInBtn) {
+        signInBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            isSignupMode = false;
+            if (authTitle) authTitle.textContent = "Sign In";
+            if (authToggleText) authToggleText.innerHTML = `Don't have an account? <a href="#" id="auth-toggle-link">Sign Up</a>`;
+            if (authDisplayName) authDisplayName.style.display = 'none'; // Hide on signin
+            if (authModal) authModal.classList.remove('hidden');
+        });
+    }
 
-// Open modal
-if (signInBtn) {
-  signInBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    isSignupMode = false;
-    if (authTitle) authTitle.textContent = "Sign In";
-    if (authToggleText) authToggleText.innerHTML = `Don't have an account? <a href="#" id="auth-toggle-link">Sign Up</a>`;
-    if (authDisplayName) authDisplayName.style.display = 'none'; // Hide on signin
-    if (authModal) authModal.classList.remove('hidden');
-  });
-}
+    if (signUpBtn) {
+        signUpBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            isSignupMode = true;
+            if (authTitle) authTitle.textContent = "Sign Up";
+            if (authToggleText) authToggleText.innerHTML = `Already have an account? <a href="#" id="auth-toggle-link">Sign In</a>`;
+            if (authDisplayName) authDisplayName.style.display = 'block'; // Show on signup
+            if (authModal) authModal.classList.remove('hidden');
+        });
+    }
 
-if (signUpBtn) {
-  signUpBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    isSignupMode = true;
-    if (authTitle) authTitle.textContent = "Sign Up";
-    if (authToggleText) authToggleText.innerHTML = `Already have an account? <a href="#" id="auth-toggle-link">Sign In</a>`;
-    if (authDisplayName) authDisplayName.style.display = 'block'; // Show on signup
-    if (authModal) authModal.classList.remove('hidden');
-  });
-}
     // Close modal
     if (authClose) {
         authClose.addEventListener('click', () => {
@@ -332,83 +359,83 @@ if (signUpBtn) {
         });
     }
 
-// Toggle between Sign In / Sign Up inside modal
-if (authToggleText) {
-  authToggleText.addEventListener('click', (e) => {
-    if (e.target.id === "auth-toggle-link") {
-      e.preventDefault();
-      isSignupMode = !isSignupMode;
-      if (authTitle) authTitle.textContent = isSignupMode ? "Sign Up" : "Sign In";
-      if (authToggleText) {
-        authToggleText.innerHTML = isSignupMode
-          ? `Already have an account? <a href="#" id="auth-toggle-link">Sign In</a>`
-          : `Don't have an account? <a href="#" id="auth-toggle-link">Sign Up</a>`;
-      }
-      if (authDisplayName) {
-        authDisplayName.style.display = isSignupMode ? 'block' : 'none';
-      }
+    // Toggle between Sign In / Sign Up inside modal
+    if (authToggleText) {
+        authToggleText.addEventListener('click', (e) => {
+            if (e.target.id === "auth-toggle-link") {
+                e.preventDefault();
+                isSignupMode = !isSignupMode;
+                if (authTitle) authTitle.textContent = isSignupMode ? "Sign Up" : "Sign In";
+                if (authToggleText) {
+                    authToggleText.innerHTML = isSignupMode
+                        ? `Already have an account? <a href="#" id="auth-toggle-link">Sign In</a>`
+                        : `Don't have an account? <a href="#" id="auth-toggle-link">Sign Up</a>`;
+                }
+                if (authDisplayName) {
+                    authDisplayName.style.display = isSignupMode ? 'block' : 'none';
+                }
+            }
+        });
     }
-  });
-}
 
-// Submit auth form
-if (authForm) {
-  authForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    // Submit auth form
+    if (authForm) {
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-    const email = (authEmail ? authEmail.value.trim() : '');
-    const displayNameInput = (authDisplayName ? authDisplayName.value.trim() : '');
-    const password = (authPassword ? authPassword.value.trim() : '');
-    if (!email || !password) return;
+            const email = (authEmail ? authEmail.value.trim() : '');
+            const displayNameInput = (authDisplayName ? authDisplayName.value.trim() : '');
+            const password = (authPassword ? authPassword.value.trim() : '');
+            if (!email || !password) return;
 
-    // Prepare displayName for signup body (optional, fallback to email prefix if empty)
-    const bodyDisplayName = isSignupMode && displayNameInput ? displayNameInput : undefined;
+            // Prepare displayName for signup body (optional, fallback to email prefix if empty)
+            const bodyDisplayName = isSignupMode && displayNameInput ? displayNameInput : undefined;
 
-    const endpoint = isSignupMode ? "/signup" : "/signin";
-    const body = isSignupMode 
-      ? JSON.stringify({ email, password, displayName: bodyDisplayName })
-      : JSON.stringify({ email, password });
+            const endpoint = isSignupMode ? "/signup" : "/signin";
+            const body = isSignupMode 
+                ? JSON.stringify({ email, password, displayName: bodyDisplayName })
+                : JSON.stringify({ email, password });
 
-    try {
-      const res = await fetch(`${API_URL}${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: body,
-      });
+            try {
+                const res = await fetch(`${API_URL}${endpoint}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: body,
+                });
 
-      const data = await res.json();
+                const data = await res.json();
 
-      if (data.token) {
-        // Decode displayName from JWT (backend-provided)
-        const decodedDisplayName = decodeJWT(data.token);
-        let displayName = decodedDisplayName;
-        
-        // Fallback if missing (e.g., old user or decode fail)
-        if (!displayName) {
-          displayName = email.split('@')[0].replace(/[^a-zA-Z0-9]/g, '');
-        }
+                if (data.token) {
+                    // Decode displayName from JWT (backend-provided)
+                    const decodedDisplayName = decodeJWT(data.token);
+                    let displayName = decodedDisplayName;
+                    
+                    // Fallback if missing (e.g., old user or decode fail)
+                    if (!displayName) {
+                        displayName = email.split('@')[0].replace(/[^a-zA-Z0-9]/g, '');
+                    }
 
-        // Sanitize for display
-        displayName = displayName.replace(/[^a-zA-Z0-9]/g, '').substring(0, 50);
+                    // Sanitize for display
+                    displayName = displayName.replace(/[^a-zA-Z0-9]/g, '').substring(0, 50);
 
-        // Store credentials locally
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('userName', displayName);
-        showUserMenu(displayName);
-        if (authModal) authModal.classList.add('hidden');
-        // Clear form
-        if (authEmail) authEmail.value = '';
-        if (authDisplayName) authDisplayName.value = '';
-        if (authPassword) authPassword.value = '';
-      } else {
-        alert(data.error || "Authentication failed.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Network error. Please try again.");
+                    // Store credentials locally
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('userName', displayName);
+                    showUserMenu(displayName);
+                    if (authModal) authModal.classList.add('hidden');
+                    // Clear form
+                    if (authEmail) authEmail.value = '';
+                    if (authDisplayName) authDisplayName.value = '';
+                    if (authPassword) authPassword.value = '';
+                } else {
+                    alert(data.error || "Authentication failed.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Network error. Please try again.");
+            }
+        });
     }
-  });
-}
 
     // Close modal on outside click
     if (authModal) {
