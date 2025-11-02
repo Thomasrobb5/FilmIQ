@@ -352,14 +352,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Close modal
+
     if (authClose) {
         authClose.addEventListener('click', () => {
             if (authModal) authModal.classList.add('hidden');
         });
     }
 
-    // Toggle between Sign In / Sign Up inside modal
+
     if (authToggleText) {
         authToggleText.addEventListener('click', (e) => {
             if (e.target.id === "auth-toggle-link") {
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Submit auth form
+
     if (authForm) {
         authForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -388,7 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = (authPassword ? authPassword.value.trim() : '');
             if (!email || !password) return;
 
-            // Prepare displayName for signup body (optional, fallback to email prefix if empty)
             const bodyDisplayName = isSignupMode && displayNameInput ? displayNameInput : undefined;
 
             const endpoint = isSignupMode ? "/signup" : "/signin";
@@ -445,4 +444,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
 });

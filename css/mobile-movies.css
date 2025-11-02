@@ -1,0 +1,134 @@
+/* Mobile-Specific Overrides for Movies Page */
+/* Assumes base CSS loaded; targets max-width: 768px but optimized for touch */
+
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+    
+    .movies-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .movies-header p {
+        font-size: 1rem;
+    }
+    
+    /* Stacked Filter Controls */
+    .filter-controls {
+        position: static;
+        padding: 0 0 1rem 0;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    #sort-select {
+        flex: 1;
+        max-width: 200px;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Single-Column Grid for Better Scrolling */
+    .movies-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 100%;
+    }
+    
+    .movie-poster {
+        padding: 0.75rem;
+        gap: 0.5rem;
+        max-width: 100%;
+    }
+    
+    .movie-poster img {
+        height: 250px; /* Taller for touch */
+        border-radius: 6px;
+    }
+    
+    .movie-title-grid {
+        font-size: 1rem;
+        white-space: normal; /* Allow wrap on mobile */
+        line-height: 1.2;
+        padding: 0.25rem;
+    }
+    
+    /* Larger Modal for Touch */
+    .movie-modal-content {
+        width: 95%;
+        margin: 5% auto;
+        padding: 1.5rem;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .movie-title {
+        font-size: 1.5rem;
+    }
+    
+    .movie-summary {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .close-modal {
+        font-size: 24px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    /* Loading Bar Full Width */
+    .loading-container {
+        padding: 1rem;
+    }
+    
+    .loading-bar {
+        height: 4px;
+    }
+    
+    /* Nav Simplification */
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .header-right {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .social-icons {
+        order: 3;
+    }
+    
+    .auth-btn {
+        width: 100%;
+        padding: 0.5rem;
+    }
+}
+
+/* Extra Small Screens (e.g., <480px) */
+@media (max-width: 480px) {
+    .movies-grid {
+        gap: 0.75rem;
+    }
+    
+    .movie-poster img {
+        height: 200px;
+    }
+    
+    .movie-title-grid {
+        font-size: 0.9rem;
+    }
+    
+    .filter-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #sort-select {
+        max-width: 100%;
+    }
+}

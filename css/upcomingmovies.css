@@ -1,0 +1,528 @@
+/* Movies Page Styles - Consolidated Additions (Enhanced) */
+/* Root variables for theming (reversed: default dark) */
+:root {
+    --bg-color: #141414; /* Dark background for default/light class */
+    --text-color: #ffffff; /* Light text */
+    --grid-gap: 24px; /* Small gaps between posters */
+    --modal-bg: rgba(0, 0, 0, 0.9);
+    --accent-color: #00ff88; /* Neon green accent for film text */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --hover-shadow: 0 8px 16px rgba(0, 255, 136, 0.2); /* Green-tinted hover shadow */
+}
+
+body.light {
+    --bg-color: #141414;
+    --text-color: #ffffff;
+    --modal-bg: rgba(0, 0, 0, 0.9);
+}
+
+body.dark {
+    --bg-color: #ffffff; /* Light background for dark class */
+    --text-color: #000000; /* Dark text */
+    --modal-bg: rgba(0, 0, 0, 0.8);
+}
+
+/* Main content area */
+main {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 2rem;
+    min-height: calc(100vh - 200px);
+    position: relative; /* For absolute filter positioning */
+}
+
+/* Header for movies */
+.movies-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.movies-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: var(--text-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.movies-header p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin: 0.5rem 0 0;
+}
+
+/* Movies Grid */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--grid-gap);
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#movies-grid.loaded {
+    opacity: 1;
+}
+
+/* Movie Poster with Title (enhanced: dark backing, hover gradient) */
+.movie-poster {
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px; /* Softer corners */
+    overflow: hidden;
+    transition: all 0.3s ease; /* Smoother transitions */
+    background-color: #0a0a0a; /* Darker backing plate */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem; /* More padding for breathing room */
+    gap: 0.75rem;
+    color: var(--text-color); /* Inherit text color */
+    box-shadow: var(--shadow);
+}
+
+.movie-poster:hover {
+    transform: translateY(-4px) scale(1.02); /* Lift and subtle scale */
+    box-shadow: var(--hover-shadow);
+}
+
+.movie-poster::before { /* Gradient overlay on hover */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    border-radius: 12px;
+}
+
+.movie-poster:hover::before {
+    opacity: 1;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 280px; /* Slightly shorter for better title fit */
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    z-index: 2; /* Above overlay */
+    position: relative;
+}
+
+.movie-title-grid {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700; /* Bold */
+    text-align: center;
+    color: var(--accent-color); /* Neon green */
+    opacity: 1; /* Full opacity */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 0 0.25rem;
+    z-index: 2; /* Above overlay */
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); /* Subtle shadow for readability */
+}
+
+/* Loading Styles (enhanced: smoother bar) */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.loading-bar {
+    width: 100%;
+    height: 6px; /* Thicker bar */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+body.dark .loading-bar {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e50914, #00ff88); /* Red-to-green gradient */
+    width: 0%;
+    transition: width 0.4s ease;
+    border-radius: 3px;
+}
+
+#loading-text {
+    color: var(--text-color);
+    font-size: 1rem;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.loading-container.hidden {
+    display: none;
+}
+
+/* Filter Controls (enhanced: better hover) */
+.filter-controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 10;
+}
+
+#sort-select {
+    background-color: rgba(20, 20, 20, 0.8); /* Semi-transparent dark */
+    color: var(--accent-color); /* Green text */
+    border: 1px solid var(--accent-color);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+body.dark #sort-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #333;
+    color: #000;
+}
+
+#sort-select:hover {
+    background-color: rgba(0, 255, 136, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+}
+
+#sort-select:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Movie Modal (No Poster; enhanced typography) */
+.movie-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg);
+    animation: fadeIn 0.3s;
+}
+
+.movie-modal-content {
+    background-color: var(--bg-color);
+    margin: 5% auto;
+    padding: 2.5rem; /* More padding */
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+    /* No poster space; more room for text */
+}
+
+.movie-modal-content img {
+    display: none; /* Hide poster */
+}
+
+.movie-title {
+    font-size: 2rem; /* Larger title */
+    margin: 0 0 1rem 0;
+    color: var(--accent-color); /* Green accent */
+    font-weight: 700;
+}
+
+.movie-date, .movie-director {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.movie-summary {
+    line-height: 1.6; /* Better readability */
+    margin-top: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    transition: color 0.2s ease;
+}
+
+.close-modal:hover {
+    color: var(--accent-color);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 16px; /* Smaller gap on mobile */
+    }
+    
+    .movies-header h1 {
+        font-size: 2rem;
+    }
+    
+    .movie-modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 1.5rem;
+    }
+    
+    .movie-poster {
+        padding: 0.75rem;
+        gap: 0.5rem;
+    }
+    
+    .movie-title-grid {
+        font-size: 0.85rem;
+    }
+    
+    .movie-poster img {
+        height: 220px;
+    }
+    
+    .filter-controls {
+        position: static; /* Stack on mobile */
+        padding: 0 0 1rem 0;
+        text-align: center;
+    }
+}
+
+/* View Toggle Button */
+.view-toggle {
+    background-color: rgba(0, 255, 136, 0.1);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+.view-toggle:hover {
+    background-color: rgba(0, 255, 136, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+}
+
+.view-toggle:focus {
+    outline: 2px solid var(--accent-color);
+}
+
+/* Calendar View (Timeline) */
+.calendar-view {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.calendar-view.show {
+    opacity: 1;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: var(--accent-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 3px;
+    opacity: 0.7;
+}
+
+.timeline-item {
+    padding: 1rem 0;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    opacity: 0;
+    animation: slideIn 0.5s ease forwards;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -17px; /* For odd items */
+    background-color: #0a0a0a;
+    border: 4px solid var(--accent-color);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -16px;
+    right: auto;
+}
+
+.timeline-item .date {
+    position: absolute;
+    top: 0;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    background: #0a0a0a;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    opacity: 0.9;
+}
+
+.timeline-item:nth-child(odd) .date {
+    right: -6.5rem;
+}
+
+.timeline-item:nth-child(even) .date {
+    left: -6.5rem;
+    text-align: right;
+}
+
+.timeline-item .content {
+    position: relative;
+    background-color: #0a0a0a;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 1rem 1rem 0; /* For odd */
+}
+
+.timeline-item:nth-child(even) .content {
+    margin: 1rem 0 1rem 1rem; /* For even */
+}
+
+.timeline-item .movie-title-cal {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 0 0 0.25rem 0;
+    text-align: center;
+}
+
+.timeline-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hide grid when calendar active */
+#movies-grid.calendar-hidden {
+    display: none;
+}
+
+.calendar-view.hidden {
+    display: none;
+}
+
+/* Responsive for Timeline */
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-top: 1.5rem;
+    }
+    
+    .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
+        left: 0 !important;
+    }
+    
+    .timeline-item::after {
+        left: 15px;
+    }
+    
+    .timeline-item .date {
+        left: -6.5rem;
+        right: auto;
+        text-align: left;
+    }
+    
+    .timeline-item .content {
+        margin: 0;
+    }
+    
+    .view-toggle {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+    
+    .filter-controls {
+        position: static;
+        text-align: center;
+        padding: 0 0 1rem 0;
+    }
+    
+    #sort-select {
+        margin-right: 0.5rem;
+    }
+}

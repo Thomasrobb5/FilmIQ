@@ -8,6 +8,7 @@
     --header-gradient: linear-gradient(90deg, #ffffff 0%, #f0f8ff 100%);
     --transition: all 0.3s ease;
     --hover-bg: rgba(0, 255, 136, 0.1);
+    --grid-gap: 24px;
 }
 
 [data-theme="dark"] {

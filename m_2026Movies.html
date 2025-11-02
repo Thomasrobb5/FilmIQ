@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Tom J Robb</title>
+    <title>Sitemap - Tom J Robb</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/upcomingmovies.css">
+
     <link rel="apple-touch-icon" sizes="180x180" href="./data/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./data/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./data/favicon-16x16.png">
@@ -22,7 +24,7 @@
     </script>
 </head>
 <body>
-<header role="banner">
+    <header role="banner">
         <a href="m_index.html" class="logo-link" aria-label="Tom J Robb Home">
             <img src="./data/android-chrome-192x192.png" alt="Tom J Robb Logo" class="logo">
         </a>
@@ -49,41 +51,48 @@
             </div>
         </div>
     </header>
+
 <main>
-    <section class="hero">
-        <div class="logo-container">
-            <div class="logo-text">
-                <div class="small"></div>
-                <div class="large">Contact Us</div>
-            </div>
+    <div class="movies-header">
+        <h1>Upcoming Movies 2026</h1>
+        <p>Discover the most anticipated films hitting theaters in 2026.</p>
+    </div>
+    <!-- Loading Indicator -->
+    <div id="loading-container" class="loading-container">
+        <div class="loading-bar">
+            <div id="progress-bar" class="progress-fill"></div>
         </div>
-        <p class="collection-text">We’re here to assist and collaborate.</p>
-    </section>
-    <section class="content">
-        <h1>Contact Us</h1>
-        <p>Have questions, feedback, or ideas about FilmIQ? We’d love to hear from you! Please use the form below to get in touch, or reach out directly via email at <a href="mailto:thomasrobb5@gmail.com" class="inline-link">thomasrobb5@gmail.com</a>. Your input helps shape the future of this project!</p>
-
-        <form class="contact-form" action="https://formspree.io/f/xvgvrnye" method="POST">
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required placeholder="Enter your name" aria-required="true">
-            </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email" aria-required="true">
-            </div>
-            <div class="form-group">
-                <label for="message">Your Message</label>
-                <textarea id="message" name="message" required placeholder="Share your thoughts or questions" rows="6" aria-required="true"></textarea>
-            </div>
-            <button type="submit" class="submit-button">Submit</button>
-        </form>
-
-    </section>
+        <p id="loading-text">Loading upcoming movies...</p>
+    </div>
+    <!-- Filter Controls -->
+    <div class="filter-controls">
+        <label for="sort-select" class="sr-only">Sort by</label>
+        <select id="sort-select">
+            <option value="popularity">Popularity (Default)</option>
+            <option value="release_date">Release Date</option>
+            <option value="title">Title</option>
+        </select>
+    </div>
+    <div class="movies-grid" id="movies-grid">
+        <!-- Movies will be populated by JS -->
+    </div>
 </main>
+
 <footer role="contentinfo">
-   <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
+    <p>© 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
 </footer>
+<!-- Movie Modal -->
+<div id="movie-modal" class="movie-modal">
+    <div class="movie-modal-content">
+        <button id="movie-close" type="button" class="close-modal">✖</button>
+        <h2 id="modal-title" class="movie-title"></h2>
+        <p id="modal-date" class="movie-date"></p>
+        <p id="modal-director" class="movie-director"></p>
+        <p id="modal-summary" class="movie-summary"></p>
+    </div>
+</div>
+
 <script src="js/mobile.js"></script>
+<script src="js/upcomingmoviesscript.js"></script>
 </body>
 </html>
