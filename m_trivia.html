@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="FilmIQ - Trivia" />
-    <title>FilmIQ - Trivia</title>
-    <link rel="stylesheet" href="css/styles_trivia.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="FilmIQ - Mobile Trivia" />
+    <title>FilmIQ - Mobile Trivia</title>
+    <link rel="stylesheet" href="css/mobile_trivia.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="./data/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./data/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./data/favicon-16x16.png">
@@ -23,23 +23,11 @@
           color: #fff;
       }
     </style>
-        <script>
-        function isMobileDevice() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-        }
-
-        const currentPath = window.location.pathname.split('/').pop() || 'trivia.html';
-        if (isMobileDevice() && currentPath !== 'm_trivia.html') {
-            setTimeout(() => { window.location.href = 'm_trivia.html'; }, 100);
-        } else if (!isMobileDevice() && currentPath === 'm_trivia.html') {
-            setTimeout(() => { window.location.href = 'trivia.html'; }, 100);
-        }
-    </script>
   </head>
   <body>
     <header>
       <h4>
-        <div id="next-puzzle-timer">Film IQ - Trivia - Work in Progress</div>
+        <div id="next-puzzle-timer">Film IQ - Mobile Trivia - Work in Progress</div>
       </h4>
       <div class="header-right">
         <div class="social-icons">
@@ -88,16 +76,14 @@
               <!-- Question text overlaid on the image's speech bubble -->
               <p id="questionText" class="question-overlay">Who is the director of the first Avengers movie?</p>
               
-
-              
               <div class="options-section">
                 <div class="option-row">
-                  <div class="option pixel-btn" data-answer="0" onmouseover="playSound('hover')" onclick="selectAnswer(this)">Option A</div>
-                  <div class="option pixel-btn" data-answer="1" onmouseover="playSound('hover')" onclick="selectAnswer(this)">Option B</div>
+                  <div class="option pixel-btn" data-answer="0" onmouseover="playSound('hover')" ontouchstart="playSound('hover')" onclick="selectAnswer(this)">Option A</div>
+                  <div class="option pixel-btn" data-answer="1" onmouseover="playSound('hover')" ontouchstart="playSound('hover')" onclick="selectAnswer(this)">Option B</div>
                 </div>
                 <div class="option-row">
-                  <div class="option pixel-btn" data-answer="2" onmouseover="playSound('hover')" onclick="selectAnswer(this)">Option C</div>
-                  <div class="option pixel-btn" data-answer="3" onmouseover="playSound('hover')" onclick="selectAnswer(this)">Option D</div>
+                  <div class="option pixel-btn" data-answer="2" onmouseover="playSound('hover')" ontouchstart="playSound('hover')" onclick="selectAnswer(this)">Option C</div>
+                  <div class="option pixel-btn" data-answer="3" onmouseover="playSound('hover')" ontouchstart="playSound('hover')" onclick="selectAnswer(this)">Option D</div>
                 </div>
               </div>
             </div>
@@ -105,7 +91,7 @@
         </div>
       </div>
 
-      <!-- Round Display (single vertical line of 15 squares, outside TV right) -->
+      <!-- Round Display (horizontal bar at bottom for mobile) -->
       <div id="roundDisplay" class="round-display">
         <div class="round-header">Rounds</div>
         <div id="roundSquares" class="round-squares"></div>
@@ -113,9 +99,9 @@
     </main>
     <footer>
       <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
-      <div id="VersionNumber" class="VersionNumber"> v1.0.0 </div>
+      <div id="VersionNumber" class="VersionNumber"> v1.0.0 Mobile </div>
     </footer>
 
-    <script src="js/script_trivia.js"></script>
+    <script src="js/m_script_trivia.js"></script>
   </body>
 </html>
