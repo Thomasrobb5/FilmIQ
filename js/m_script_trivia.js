@@ -1,5 +1,3 @@
-// m_script_trivia.js - Mobile-optimized: Added touch events, adjusted timing, same logic
-
 let currentQuestion = 0;
 let score = 0;
 let currentThemeQuestions = [];
@@ -7,10 +5,10 @@ let allQuestions = [];
 let timerInterval;
 let timeLeft;
 let sounds;
-let volume = 0.3; // Change this value (0.0 to 1.0) to adjust overall volume
-let currentRound = 0; // Track round for display (0-14)
+let volume = 0.3;
+let currentRound = 0;
 
-// Theme configurations: name, image (9 for grid)
+
 const themes = [
   { name: 'Marvel', img: 'marvel_logo.png' },
   { name: 'Star Wars', img: 'starwars_logo.png' },
@@ -69,10 +67,10 @@ async function loadQuestions() {
       .filter(line => line.trim())
       .forEach(line => {
         const parts = parseCSVLine(line);
-        if (parts.length >= 8) { // Now expect level (8th col)
+        if (parts.length >= 8) {
           const [theme, question, option_a, option_b, option_c, option_d, correct, levelStr] = parts.slice(0, 8);
           const level = parseInt(levelStr.trim());
-          const correctIndex = correct.charCodeAt(0) - 65; // A=0, B=1, etc.
+          const correctIndex = correct.charCodeAt(0) - 65; 
           if (!isNaN(level) && level >= 1 && level <= 3 && !isNaN(correctIndex) && correctIndex >= 0 && correctIndex <= 3) {
             allQuestions.push({
               theme: theme.trim(),
