@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="The Daily Movie Guessing Game" />
     <title>FilmIQ - Daily Guessing Game</title>
-    <link rel="stylesheet" href="css/styles_daily.css" />
+    <link rel="stylesheet" href="css/mobile_daily.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="./data/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./data/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./data/favicon-16x16.png">
@@ -34,18 +34,6 @@
         color: #fff;
     }
     </style>
-            <script>
-        function isMobileDevice() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-        }
-
-        const currentPath = window.location.pathname.split('/').pop() || 'daily.html';
-        if (isMobileDevice() && currentPath !== 'm_daily.html') {
-            setTimeout(() => { window.location.href = 'm_daily.html'; }, 100);
-        } else if (!isMobileDevice() && currentPath === 'm_daily.html') {
-            setTimeout(() => { window.location.href = 'daily.html'; }, 100);
-        }
-    </script>
   </head>
   <body>
     <header>
