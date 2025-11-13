@@ -6,7 +6,6 @@
     <meta name="description" content="FilmIQ - Trivia" />
     <title>FilmIQ - Trivia</title>
     <link rel="stylesheet" href="css/styles_trivia.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="./data/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./data/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./data/favicon-16x16.png">
@@ -53,71 +52,43 @@
     </header>
     <main>
       <div class="trivia-container" id="gameScreen">
+        <!-- Start Screen -->
         <div id="startScreen" class="screen active">
           <div class="stage-wrapper">
             <div class="stage start-stage">
               <div class="logo-overlay">
-                <img src="./data/triv_logo2.png" alt="Film Trivia Logo" class="logo">
+                <img src="./data/triv_logo.png" alt="Film Trivia Logo" class="logo">
               </div>
-              <div class="play-button1">
-                <button onclick="startGame()" class="pixel-btn">PLAY Trivia</button>
+              <div class="play-button">
+                <button onclick="startGame()" class="pixel-btn">PLAY TRIVIA</button>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Theme Selection Screen -->
         <div id="themeScreen" class="screen">
           <div class="stage-wrapper">
             <div class="stage theme-stage">
               <h2 class="theme-title">Select a Theme</h2>
-              <div class="carousel-container">
-                <div id="carouselTrack" class="carousel-track">
-                  <!-- Carousel slides will be populated by JS -->
-                </div>
-                <button id="carouselPrev" class="carousel-btn prev">‹</button>
-                <button id="carouselNext" class="carousel-btn next">›</button>
-              </div>
-              <div id="quickSelectBar" class="quick-select-bar">
-                <!-- Quick select buttons will be populated by JS -->
+              <div id="themeGrid" class="theme-grid">
+               
               </div>
             </div>
           </div>
         </div>
 
-        <div id="themeIntroScreen" class="screen">
-          <div class="stage-wrapper">
-            <div class="stage theme-intro-stage">
-              <div class="back-button">
-                <button onclick="goBackToThemes()" class="pixel-btn">BACK</button>
-              </div>
-              <div class="theme-intro-content">
-                <div class="theme-logo-overlay">
-                  <img id="themeIntroLogo" src="" alt="Theme Logo" class="theme-logo">
-                </div>
-                <div class="instructions">
-                  <p>Welcome to <span id="themeNameInInstructions"></span> Trivia!</p>
-                  <p>Answer 15 questions across easy, medium, and hard difficulties.</p>
-                  <p>You have 20 seconds per question. Correct answers earn points!</p>
-                  <p>Good luck and have fun!</p>
-                </div>
-                <div class="power-info">
-                  <p><strong>Power-Ups:</strong> One-Time Use! —<span class="power-label">50/50</span> eliminates 2 wrong answers, <span class="power-label">Skip</span> swaps for a new question.</p>
-                 
-                </div>
-                <div class="play-button">
-                  <button onclick="startThemeGame()" class="pixel-btn">PLAY</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <!-- Question Screen -->
         <div id="questionScreen" class="screen">
           <div class="stage-wrapper">
             <div class="stage question-stage">
-              <div id="timerDisplay" class="timer-display">20</div>
+              <!-- Timer Display -->
+              <div id="timerDisplay" class="timer-display">15</div>
               
+              <!-- Question text overlaid on the image's speech bubble -->
               <p id="questionText" class="question-overlay">Who is the director of the first Avengers movie?</p>
+              
+
               
               <div class="options-section">
                 <div class="option-row">
@@ -134,25 +105,15 @@
         </div>
       </div>
 
+      <!-- Round Display (single vertical line of 15 squares, outside TV right) -->
       <div id="roundDisplay" class="round-display">
         <div class="round-header">Rounds</div>
         <div id="roundSquares" class="round-squares"></div>
       </div>
-
-      <div id="powerUpsDisplay" class="power-ups-display">
-        <div class="power-ups-header">Powers</div>
-        <div id="powerUpsList" class="power-ups-list">
-          <div id="fiftyFiftyBox" class="power-up-box" onclick="useFiftyFifty()" title="50/50: Eliminate 2 wrong answers. One-time use only." data-tooltip="50/50: Eliminate 2 wrong answers. One-time use only.">
-            <img src="./data/triv_game/5050_logo.png" alt="50/50 Power-Up" class="power-up-img">
-          </div>
-          <div id="skipBox" class="power-up-box" onclick="useSkip()" title="Skip: Get a new question. One-time use only." data-tooltip="Skip: Get a new question. One-time use only.">
-            <img src="./data/triv_game/skip.png" alt="Skip Power-Up" class="power-up-img">
-          </div>
-        </div>
-      </div>
     </main>
     <footer>
       <p>&copy; 2025 Tom J Robb. Made with ❤️ and a bit of code.</p>
+      <div id="VersionNumber" class="VersionNumber"> v1.0.0 </div>
     </footer>
 
     <script src="js/script_trivia.js"></script>

@@ -1,0 +1,560 @@
+/* css/styles_trivia.css - Updated: 3x3 grid, nicer theme items with names and glows */
+
+body {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 3rem;
+    background: rgba(0, 0, 0, 0.514);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.social-icons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.05);
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 0.7em;
+}
+footer p {
+    margin: 5px;
+    color: #ffffff;
+}
+
+/* TV Container - Transparent black bg */
+.trivia-container {
+    width: 90vmin;
+    height: 60vmin;
+    max-width: 1500px;
+    max-height: 900px;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 60px;
+    overflow: hidden;
+    box-shadow: 
+        0 0 50px rgba(0, 0, 0, 0.8),
+        inset 0 0 20px rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.11); /* Transparent black */
+    border: 25px solid #ebebebd5;
+}
+
+.trivia-container::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: linear-gradient(145deg, #ffffff2a, #22222270);
+    border-radius: 19px;
+    z-index: -1;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.trivia-container::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 10px;
+    background: linear-gradient(to right, #33333336, #5555551f, #3333332d);
+    border-radius: 50%;
+    z-index: -2;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.screen.active {
+    display: block;
+}
+
+.stage-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.stage {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 20px 20px;
+    box-sizing: border-box;
+}
+
+/* Start stage: No podium bg, transparent black overlay */
+.start-stage {
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0.3); /* Transparent black for logo visibility */
+}
+
+/* Theme stage: Similar to start, with grid */
+.theme-stage {
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.theme-title {
+    font-size: 0rem;
+    color: #fdfdfd;
+    text-shadow: 2px 2px 0 #000;
+    z-index: 5;
+}
+
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Strict 3x3 */
+    gap: 20px;
+    width: 90%;
+    max-width: 600px;
+    z-index: 5;
+    margin-top: 0px;
+}
+
+.theme-item {
+    cursor: pointer;
+    border-radius: 35px;
+    overflow: hidden;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(0, 0, 0, 0.2); /* Golden glow */
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.432), rgba(0, 0, 0, 0.671));
+    padding: 10px;
+    text-align: center;
+    border: 2px solid transparent;
+   
+}
+
+.theme-item:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 0, 0, 0.4); /* Brighter glow */
+    border-color: #ffffff;
+}
+
+.theme-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9; /* Maintain logo aspect */
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.theme-item p {
+    margin: 0;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* Question stage: Podium bg only here */
+.question-stage {
+    background-image: url('./data/podium_bg.jpg');
+}
+
+/* Spotlights overlay (only on question stage for now; add to start if needed) */
+.question-stage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 90% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+.logo-overlay {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 5;
+}
+
+.logo {
+    max-width: 100%;
+    max-height: 660px;
+    scale: 140%;
+    width: auto;
+    height: auto;
+    filter: drop-shadow(2px 2px 0 #000);
+}
+
+.play-button {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.pixel-btn {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: linear-gradient(145deg, #FF6B35, #F7931E);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pixel-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Question Overlay: Slightly left and down */
+.question-overlay {
+    position: absolute;
+    left: 18%; /* A little left from 25% */
+    top: 20%; /* Slightly down from 18% */
+    width: 38%; /* Fit within bubble width */
+    color: #000; /* Black text for white bubble bg */
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    line-height: 1.2;
+    z-index: 5;
+    text-align: left;
+    background: transparent;
+    padding: 10px 15px;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+
+}
+
+.host-wrapper {
+    position: absolute;
+    right: 8%; /* Fine-tune based on image */
+    top: 15%; /* Align with question level */
+    z-index: 6;
+}
+
+.host-avatar {
+    width: 120px;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+}
+
+/* Options: 2 rows of 2, very close to bottom */
+.options-section {
+    position: absolute;
+    bottom: 5%; /* Very close to bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    max-width: 600px;
+    z-index: 5;
+}
+
+.option-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.option {
+    flex: 1;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: linear-gradient(145deg, #21b2d6, #0d68cf); /* Teal like screenshot */
+    color: white;
+    border: 4px solid #363636;
+    padding: 15px;
+    border-radius: 70px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.option.selected {
+    background: linear-gradient(145deg, #FF6B35, #F7931E);
+    transform: scale(1.02);
+}
+
+.option.correct {
+    background: linear-gradient(145deg, #32CD32, #228B22);
+}
+
+.option.wrong {
+    background: linear-gradient(145deg, #DC143C, #B22222);
+}
+
+/* Timer Display */
+.timer-display {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.3rem;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 50px;
+    z-index: 5;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Round Display - Single vertical line of 15 squares, thermostat style on right */
+.round-display {
+    position: absolute;
+    left: calc(50% + 45vmin + 40px); /* Half TV width (90vmin/2=45vmin) + margin; positions outside right edge */
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 30px;
+    border: 5px solid #ffffffc2;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    min-width: 60px;
+}
+
+.round-header {
+    font-size: 0.9rem;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+.round-squares {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+}
+
+.round-square {
+    width: 20px;
+    height: 20px;
+    background: rgba(100, 100, 100, 0.5);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.round-square.active {
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+/* Color by difficulty section (first 7 green, next 5 orange, last 3 red) */
+.round-square.easy { background: rgba(76, 175, 80, 0.3); }
+.round-square.easy.active { background: #4CAF50; box-shadow: 0 0 8px rgba(76, 175, 80, 0.8); }
+
+.round-square.medium { background: rgba(255, 152, 0, 0.3); }
+.round-square.medium.active { background: #FF9800; box-shadow: 0 0 8px rgba(255, 152, 0, 0.8); }
+
+.round-square.hard { background: rgba(244, 67, 54, 0.3); }
+.round-square.hard.active { background: #F44336; box-shadow: 0 0 8px rgba(244, 67, 54, 0.8); }
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .trivia-container {
+        width: 95vw;
+        height: 70vw;
+        border-radius: 10px;
+    }
+    
+    .logo {
+        max-width: 90%;
+        max-height: 150px;
+    }
+    
+    .theme-grid {
+        grid-template-columns: repeat(3, 1fr); /* Still 3 cols on mobile, but smaller items */
+        gap: 10px;
+    }
+    
+    .theme-item {
+        padding: 8px;
+    }
+    
+    .theme-item p {
+        font-size: 0.7rem;
+    }
+    
+    .question-overlay {
+        left: 5%;
+        top: 10%;
+        width: 90%;
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    
+    .host-wrapper {
+        right: 5%;
+        top: 5%;
+    }
+    
+    .options-section {
+        bottom: 5%;
+        width: 95%;
+    }
+    
+    .option-row {
+        flex-direction: column;
+    }
+    
+    .trivia-container::after {
+        display: none;
+    }
+    
+    header {
+        padding: 0.3rem 1rem;
+    }
+}
+
+@media (max-width: 1920px) {
+.question-overlay {
+    position: absolute;
+    left: 18%; /* A little left from 25% */
+    top: 20%; /* Slightly down from 18% */
+    width: 38%; /* Fit within bubble width */
+    color: #000; /* Black text for white bubble bg */
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    line-height: 1.2;
+    z-index: 5;
+    text-align: left;
+    background: transparent;
+    padding: 10px 15px;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+
+}
+
+.option {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background: linear-gradient(145deg, #21b2d6, #0d68cf); /* Teal like screenshot */
+    color: white;
+    border: 4px solid #363636;
+    padding: 15px;
+    border-radius: 70px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.options-section {
+    position: absolute;
+    bottom: 5%; /* Very close to bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+    max-width: 600px;
+    z-index: 5;
+}
+
+.option-row {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+}
+
+}
